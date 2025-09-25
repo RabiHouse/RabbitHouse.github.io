@@ -3,8 +3,8 @@ site:
   name: "RabbitflowerDiary"
   title: "RabbitflowerDiary"
   description: "Illust Creator / Rabbit Lover"
-  logo: "assets/images/logo.png"
-  favicon: "assets/images/logo.png"
+  logo: 'assets/images/logo.png'
+  favicon: 'assets/images/logo.png'
   baseurl: "/"
   google_analytics: "UA-46278016-1"
   disqus: "demowebsite"
