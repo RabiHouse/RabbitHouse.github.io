@@ -1,0 +1,70 @@
+# Site
+name: "Rabbitflower Diary"
+title: "Rabbitflower Diary"
+description: "NFT Creator& Rabbit Lover."
+logo: 'assets/images/logo.png'
+favicon: 'assets/images/logo.png'
+baseurl: /
+google_analytics: 'UA-46278016-1'
+disqus: 'demowebsite'
+mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
+include: ["_pages"]
+permalink: /:title/
+
+# Authors
+authors:
+  Rabbitflower:
+    name: Rabbitflower
+    display_name: Rabbitflower
+    avatar: 'assets/images/avatar1.png'
+    web: https://linktr.ee/rabi_house
+    X: https://x.com/Rabihouse
+    description: "うさ世話人
+うさの世話人をしています。 ご主うさは♥らびこ♥嬢です。 うさぎ世話人歴30年超えになります。 イラスト描いています。"
+ ❤らびこ❤:
+    name: ❤らびこ❤
+    display_name: ❤RABIKO❤   
+    avatar: 'assets/images/avatar2.png'
+    web: https://www.wowthemes.net
+    twitter: https://twitter.com/wowthemesnet
+    description: "うさの国インフルエンサー"
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
+    
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+  layout: archive
+  permalinks:
+    category: '/category/:name/'
+    
+# Pagination 
+paginate: 6
+paginate_path: /page:num/
+    
+# Other
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
+# Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
+adsense: "disabled"
+adsense-data-ad-client: "ca-pub-3412143450191416"
+adsense-data-ad-slot: "1363087678"
+
+# Lazy Images ("enabled" or "disabled")
+lazyimages: "disabled"
+
+exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
