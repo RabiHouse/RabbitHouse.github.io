@@ -2,8 +2,10 @@
 layout: post
 title:  "The first mass-produced book to deviate from a rectilinear format"
 author: Rabbitflower
-categories: [ Jekyll, tutorial ]
+categories: [ test, rabbit ]
 image: assets/images/jumbotron.jpg
+featured: true
+hidden: true
 ---
 テスト投稿００１
 
