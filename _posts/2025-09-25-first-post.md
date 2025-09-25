@@ -3,7 +3,7 @@ layout: post
 title:  "The first mass-produced book to deviate from a rectilinear format"
 author: Rabbitflower
 categories: [ Jekyll, tutorial ]
-image: assets/images/17.jpg
+image: assets/images/jumbotron.jpg
 ---
 テスト投稿００１
 
