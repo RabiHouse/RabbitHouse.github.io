@@ -1,8 +1,7 @@
 # Site
-site:
   name: "RabbitflowerDiary"
   title: "RabbitflowerDiary"
-  description: "Illust Creator / Rabbit Lover"
+  description: "Illust Creator/ Rabbit Lover"
   logo: 'assets/images/logo.png'
   favicon: 'assets/images/logo.png'
   baseurl: "/"
