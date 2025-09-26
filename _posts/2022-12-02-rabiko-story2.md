@@ -4,6 +4,7 @@ title:  "秋の終わり"
 author: Rabbitflower
 categories: [ story, rabbit, rabiko, rabbit-world ]
 image: assets/images/webp/akinoowari.webp
+hidden: true
 ---
 
 ♥らびこ♥は朝、お家にりんごがないことに気が付きました。  

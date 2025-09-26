@@ -4,6 +4,7 @@ title:  "落ち葉遊び"
 author: Rabbitflower
 categories: [ story, rabbit, rabiko, rabbit-world ]
 image: assets/images/webp/ochiba.webp
+hidden: true
 ---
 
 ♥らびこ♥は★ねこみ★と一緒に近くの丘へやってきました。  
