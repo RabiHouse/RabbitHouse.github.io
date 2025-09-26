@@ -4,13 +4,12 @@ title:  "楽しい雪遊び"
 author: Rabbitflower
 categories: [ story, rabbit, rabiko, rabbit-world ]
 image: assets/images/webp/yukiasobi.webp
-hidden: true
 ---
 
 朝、♥らびこ♥はとても寒く感じました。  
   
 昨日までも寒かったけれど、暖炉があるので寒くありませんでしたが、今日はもっと寒くて、暖炉があってもあまり暖かくありません。  
-  
+  <!--more-->
 起き上がると体がブルっと震えたので、急いで温かい毛糸のセーターを来ました。  
 チモシー茶を淹れるためのお湯を準備して、カーテンを開けると、一面の銀世界！  
   
