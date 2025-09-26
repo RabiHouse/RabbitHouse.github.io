@@ -2,7 +2,7 @@
 layout: post
 title:  "落ち葉遊び"
 author: Rabbitflower
-categories: [ blog, rabbit, information ]
+categories: [ story, rabbit, rabiko, rabbit-world ]
 image: assets/images/webp/ochiba.webp
 ---
 
