@@ -2,7 +2,8 @@
 layout: post
 title:  "About Blog"
 author: Rabbitflower
-categories: [ blog, rabbit, information ]
+categories: [information ]
+tags: [blog, rabbit]
 image: assets/images/1.png
 featured: true
 hidden: true
