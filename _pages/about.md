@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Mediumish Template for Jekyll
+title: Rabbitflower
 permalink: /about
 comments: true
 ---
@@ -8,27 +8,32 @@ comments: true
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
 
-<p>This website is built with Jekyll and Mediumish template for Jekyll. It's for demonstration purposes, no real content can be found. Mediumish template for Jekyll is compatible with Github pages, in fact even this demo is created with Github Pages and hosted with Github.</p>
+<p>日本のイラストレーター、うさぎ好きです。
+うさぎをメインに色々なPFPを描く「USA LOVER」シリーズと、少女漫画のテイストで描く「Rabbitflower Doll」シリーズをNFTサイトの<a href="https://xrp.cafe/ja/collection/rabbitflower/">XRP.Cafe</a>にて展開中。
 
-<p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/mediumish-jekyll-template.png" alt="jekyll template mediumish" /></p>
-<h4>Documentation</h4>
+主にSNSで作品紹介とともにうさぎの世界のうさの国をオリジナルキャラクターの❤らびこ❤とともに紹介し、うさの世界を可視化しています。<a href="https://twitter.com/RabiHouse">𝕏</a>や<a href="https://bsky.app/profile/timothy.rabbitflowerdiary.com">Bluesky</a>ではNFTの紹介のほか、お天気お姉さんのルブラン美夜子さんのお天気コーナーのキャプチャ風ポスト、<a href="https://lite.tiktok.com/t/ZSHWBnpXpFTBQ-vwO9b/">tiktok</a>ではルブラン美夜子さんの動画やうさの国の日常動画（AIフル活用）を載せています。また、うさTVのニュースサイトも掲載中。</p>
 
-<p>Please, read the docs <a href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/">here</a>.</p>
+<p>Japanese illustrator and rabbit lover.
 
-<h4>Questions or bug reports?</h4>
+Currently running her "USA LOVER" series, which features various PFPs featuring rabbits, and my "Rabbitflower Doll" series, which are drawn in a shoujo manga style, on the NFT site <a href="https://xrp.cafe/ja/collection/rabbitflower/">XRP.Cafe</a>.
 
-<p>Head over to our <a href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Github repository</a>!</p>
+I mainly posts on social media introducing my works and the rabbit world of Rabbit World with my original character ❤Rabiko❤, visualizing the world of rabbits. In addition to introducing NFTs, my accounts <a href="https://twitter.com/RabiHouse">𝕏</a> and <a href="https://bsky.app/profile/timothy.rabbitflowerdiary.com">Bluesky</a> also feature screenshot-style posts from weather girl Leblanc Miyoko's weather segment, and on <a href="https://lite.tiktok.com/t/ZSHWBnpXpFTBQ-vwO9b/">tiktok</a> I posts videos of Leblanc Miyoko and daily life in Rabbit World (fully utilizing AI). I also posts on Rabbit TV's news site.</p>
+
+<p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/avatar.png" alt="Rabbitflower" /></p>
 
 </div>
 
 <div class="col-md-4">
 
 <div class="sticky-top sticky-top-80">
-<h5>Buy me a coffee</h5>
+<h5>xrp.cafe</h5>
 
-<p>Thank you for your support! Your donation helps me to maintain and improve <a target="_blank" href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Mediumish <i class="fab fa-github"></i></a>.</p>
+<p>私の作品は下記で見ることができ、仮想通貨のxrpをお持ちなら購入することも可能です！ You can see my work below, and if you have the cryptocurrency XRP you can also buy it!</p>
 
-<a target="_blank" href="https://www.wowthemes.net/donate/" class="btn btn-danger">Buy me a coffee</a> <a target="_blank" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/" class="btn btn-warning">Documentation</a>
+<a target="_blank" href="https://xrp.cafe/ja/collection/rabbitflower/" class="btn btn-primary">All works</a> 
+<a img class="shadow-lg" src="{{site.baseurl}}/assets/images/avatar.png" alt="Rabbitflower" /></a>
+<a target="_blank" href="https://xrp.cafe/usercollection/rD1m8grMwc2LX4Qb218vbrua7JKmFqandH/rD1m8grMwc2LX4Qb218vbrua7JKmFqandH/1" class="btn btn-success">On sale</a> 
+<a img class="shadow-lg" src="{{site.baseurl}}/assets/images/avatar.png" alt="Rabbitflower" /></a>
 
 </div>
 </div>
