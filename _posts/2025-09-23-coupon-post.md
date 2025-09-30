@@ -8,6 +8,9 @@ image: assets/images/1.png
 featured: true
 hidden: true
 ---
+<p><b>私が配布できるクーポン</b></p>
+
+<!--more-->
 
 <div class="container text-center">
   <div class="row">
@@ -16,12 +19,13 @@ hidden: true
 <a href="https://ifttt.com/join?referral_code=IgKY1KI3qOL8CjYPH453qKUqajuJ6LWN" target="_blank" rel="noopener noreferrer">
        <img src="/RabbitHouse.github.io/assets/images/iftttcoupon.svg" alt="IFTTT" width="200">
 </a>
+<p>IgKY1KI3qOL8CjYPH453qKUqajuJ6LWN</p>
 <p>IFTTTProの10%オフクーポン<br>10% off coupon for IFTTT Pro</p>
     </div>
   </div>
 </div>
 
-
+<br>
 
 <div class="container text-center">
 <div class="col">
@@ -47,7 +51,7 @@ hidden: true
     });
   }
 </script>
-<p>上記バナーからサインイン、またはコード入力で入会後、累計5000Ptの交換完了で1000ptプレゼント</p>
+<p>上記バナーからサインイン・またはコード入力で入会後<br>累計5000Ptの交換完了で1000ptプレゼント</p>
 
     </div>
 <div class="col">
