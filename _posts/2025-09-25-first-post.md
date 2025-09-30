@@ -9,6 +9,9 @@ featured: true
 hidden: true
 ---
 
+<div style="text-align: center;"><img src="/assets/images/iftttcoupon.svg" alt="IFTTT" width="200px"> </div>
+
+
 こちらはネットをふらふらとさまよう私のまとめページとなっております。  
 今までいろいろな場所に投稿してきた記事をまとめていこうとしております。  
 やっと自前ブログをなんとか構築できた（できそう・まだ途中）のでこれから少しずつ集約できればと思います。  <!--more-->
