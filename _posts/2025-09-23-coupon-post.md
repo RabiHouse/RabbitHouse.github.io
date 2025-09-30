@@ -16,24 +16,6 @@ hidden: true
 <a href="https://ifttt.com/join?referral_code=IgKY1KI3qOL8CjYPH453qKUqajuJ6LWN" target="_blank" rel="noopener noreferrer">
        <img src="/RabbitHouse.github.io/assets/images/iftttcoupon.svg" alt="IFTTT" width="200">
 </a>
-<!-- コピー機能記事 -->
-
-<style>
-#copyText { margin-right: 2px; }
-</style>
- <p id="copyText">IgKY1KI3qOL8CjYPH453qKUqajuJ6LWN</p>
-<button onclick="copyToClipboard()">coupon copy</button>
-
-<script>
-  function copyToClipboard() {
-    const text = document.getElementById("copyText").innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      alert("コピーしました: " + text);
-    }).catch(err => {
-      alert("コピーに失敗しました: " + err);
-    });
-  }
-</script>
 <p>IFTTTProの10%オフクーポン<br>10% off coupon for IFTTT Pro</p>
     </div>
   </div>
@@ -78,4 +60,3 @@ hidden: true
 
     </div>
   </div>
-</div>
