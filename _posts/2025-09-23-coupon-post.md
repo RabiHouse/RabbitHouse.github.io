@@ -36,7 +36,13 @@ hidden: true
 </script>
 <p>IFTTTProの10%オフクーポン<br>10% off coupon for IFTTT Pro</p>
     </div>
-    <div class="col">
+  </div>
+</div>
+
+
+
+<div class="container text-center">
+<div class="col">
 <p><b>Powlお友達紹介</b></p>
 <a href="https://web.powl.jp/?invite_code=T9KWWSNEPM4" target="_blank" rel="noopener noreferrer">
        <img src="/RabbitHouse.github.io/assets/images/powl.svg" alt="Powl" width="200">
