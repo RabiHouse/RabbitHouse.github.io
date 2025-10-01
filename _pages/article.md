@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Rabbitflower
+title: NFT参加イベント一覧
 permalink: /article
 comments: true
 ---
@@ -43,7 +43,7 @@ comments: true
 
 ***
 2023/07/12  
-### [ 【銀座探索 - 銀座NFT画廊】#12 第4回公募作品紹介第2弾 ]  
+### [ 銀座探索-銀座NFT・画廊#12・第4回公募作品紹介・第2弾 ]  
 ( https://www.xpand.website/post/exploreginza-ja-20230712-nftgallery12 )  
 
   
