@@ -53,6 +53,16 @@ image: assets/images/Illust/berry/11.gif
     <div class="carousel-item">
       <img src="assets/images/Illust/berry/22.gif" class="d-block w-100" alt="Frame Illust">
     </div>
-  </div>
+ </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>  
  
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eKy53IzPBiM?si=SbAEe7Pbbf8wtsru" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
