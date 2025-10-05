@@ -23,7 +23,7 @@ image: assets/images/Illust/berry/11.gif
 <img src="http://timothy.rabbitflowerdiary.com/assets/images/Illust/berry/17.gif" width="30%" class="rounded float-center" alt="Frame Illust">
 <img src="http://timothy.rabbitflowerdiary.com/assets/images/Illust/berry/18.gif" width="30%" class="rounded float-end" alt="Frame Illust">
 
-<img src="http://timothy.rabbitflowerdiary.com/RabbitHouse.github.io/assets/images/Illust/berry/20.gif" width="30%" class="rounded float-start" alt="Frame Illust">
+<img src="http://timothy.rabbitflowerdiary.com/assets/images/Illust/berry/20.gif" width="30%" class="rounded float-start" alt="Frame Illust">
 <img src="http://timothy.rabbitflowerdiary.com/assets/images/Illust/berry/21.gif" width="30%" class="rounded float-center" alt="Frame Illust">
 <img src="http://timothy.rabbitflowerdiary.com/assets/images/Illust/berry/22.gif" width="30%" class="rounded float-end" alt="Frame Illust"><br>
 
