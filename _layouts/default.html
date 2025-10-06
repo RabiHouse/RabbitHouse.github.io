@@ -28,6 +28,14 @@
   gtag('config', 'G-CN7LT4JH9B');
 </script>
 
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@RabiHouse">
+<meta name="twitter:title" content="{{ page.title | escape }}">
+<meta name="twitter:description" content="{{ page.excerpt | strip_html | truncate: 120 }}">
+<meta name="twitter:image" content="{{ site.url }}/assets/images/1.png">
+
+
 </head>
 
 {% if jekyll.environment == 'production' %}
