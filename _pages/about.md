@@ -45,7 +45,6 @@ You can see my work below, and if you have the cryptocurrency XRP you can also b
 
 </div>
 </div>
-
 <div># 🐰 うさぎソリティアへようこそ！
 
 うさぎが遊ぶかわいいソリティアです🌸    
@@ -53,4 +52,5 @@ You can see my work below, and if you have the cryptocurrency XRP you can also b
 {% include solitaire.html %}</div>
 </div>
 
+</div>
 
