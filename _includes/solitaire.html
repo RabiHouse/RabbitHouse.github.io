@@ -1,37 +1,131 @@
 <style>
 .solitaire-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+  position: relative; /* ←固定を解除して自然配置 */
   width: 320px;
   height: 400px;
   background: white;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   padding: 15px;
-  z-index: 1000;
+  margin: 30px auto; /* 中央寄せ */
   border: 3px solid #ff7675;
 }
-.minimize-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #ffeaa7;
-  border: none;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(45deg, #ff7675, #fd79a8);
+  border-radius: 10px;
+  color: white;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.bunny-icon {
+  font-size: 22px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+.score {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  height: 250px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.card {
+  width: 60px;
+  height: 80px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  font-size: 22px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card.selected {
+  border-color: #ff7675;
+  background: #ffe8e8;
+}
+
+.card.matched {
+  background: #d1f2eb;
+  border-color: #00b894;
+  opacity: 0.7;
+}
+
+.card.face-down {
+  background: linear-gradient(45deg, #ff7675, #fd79a8);
+  color: white;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #74b9ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #0984e3;
+}
+
+.btn.new-game {
+  background: #00b894;
+}
+
+.btn.new-game:hover {
+  background: #00a085;
 }
 </style>
 
 <div class="solitaire-container" id="solitaireGame">
-  <button class="minimize-btn" onclick="toggleMinimize()">−</button>
   <div class="game-header">
-    <div><span class="bunny-icon">🐰</span><span>うさぎソリティア</span></div>
+    <div>
+      <span class="bunny-icon">🐰</span>
+      <span>うさぎソリティア</span>
+    </div>
     <div class="score">スコア: <span id="score">0</span></div>
   </div>
+
   <div class="game-board" id="gameBoard"></div>
+
   <div class="controls">
     <button class="btn" onclick="shuffleCards()">シャッフル</button>
     <button class="btn new-game" onclick="newGame()">新しいゲーム</button>
@@ -39,15 +133,96 @@
 </div>
 
 <script>
-function shuffleCards() {
-  const score = document.getElementById("score");
-  score.textContent = Math.floor(Math.random() * 100);
+let cards = [];
+let selectedCards = [];
+let score = 0;
+const gameBoard = document.getElementById("gameBoard");
+const scoreElement = document.getElementById("score");
+
+const cardSymbols = ['🐰', '🥕', '🌸', '🍀', '⭐', '💎', '🌙', '☀️'];
+
+function initGame() {
+  cards = [];
+  cardSymbols.forEach(symbol => {
+    cards.push({symbol, matched: false, faceDown: true});
+    cards.push({symbol, matched: false, faceDown: true});
+  });
+  shuffleArray(cards);
+  renderBoard();
 }
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function renderBoard() {
+  gameBoard.innerHTML = '';
+  cards.forEach((card, index) => {
+    const cardElement = document.createElement('div');
+    cardElement.className = 'card';
+    if (card.matched) {
+      cardElement.classList.add('matched');
+      cardElement.textContent = card.symbol;
+    } else if (card.faceDown) {
+      cardElement.classList.add('face-down');
+      cardElement.textContent = '🐰';
+    } else {
+      cardElement.textContent = card.symbol;
+    }
+
+    if (selectedCards.includes(index)) {
+      cardElement.classList.add('selected');
+    }
+
+    cardElement.onclick = () => selectCard(index);
+    gameBoard.appendChild(cardElement);
+  });
+}
+
+function selectCard(index) {
+  if (cards[index].matched || selectedCards.includes(index)) return;
+  if (selectedCards.length < 2) {
+    selectedCards.push(index);
+    cards[index].faceDown = false;
+    renderBoard();
+    if (selectedCards.length === 2) {
+      setTimeout(checkMatch, 700);
+    }
+  }
+}
+
+function checkMatch() {
+  const [first, second] = selectedCards;
+  if (cards[first].symbol === cards[second].symbol) {
+    cards[first].matched = true;
+    cards[second].matched = true;
+    score += 10;
+    scoreElement.textContent = score;
+    if (cards.every(card => card.matched)) {
+      setTimeout(() => alert('🎉 おめでとう！全ペア発見！'), 500);
+    }
+  } else {
+    cards[first].faceDown = true;
+    cards[second].faceDown = true;
+  }
+  selectedCards = [];
+  renderBoard();
+}
+
 function newGame() {
-  document.getElementById("score").textContent = "0";
+  score = 0;
+  scoreElement.textContent = score;
+  selectedCards = [];
+  initGame();
 }
-function toggleMinimize() {
-  const game = document.getElementById("solitaireGame");
-  game.style.display = (game.style.display === "none") ? "block" : "none";
+
+function shuffleCards() {
+  shuffleArray(cards);
+  renderBoard();
 }
+
+initGame();
 </script>
