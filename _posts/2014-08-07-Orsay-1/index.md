@@ -11,10 +11,10 @@ tags:
 
 オルセー美術館展@国立新美術館
 
-![](images/image-30.jpg)
+<img src="/assets/images/museum/2014-08-07-Orsay-1/images/image-30.jpg"  width="400px">
 
-![](images/image-31.jpg)
+<img src="/assets/images/museum/2014-08-07-Orsay-1/images/image-31.jpg"  width="400px">
 
-![](images/image-32.jpg)
+<img src="/assets/images/museum/2014-08-07-Orsay-1/images/image-32.jpg"  width="400px">
 
-![](images/image-33.jpg)
+<img src="/assets/images/museum/2014-08-07-Orsay-1/images/image-33.jpg"  width="400px">
