@@ -1,22 +1,22 @@
 ---
 title: "チューリヒ博物館"
 date: 2013-10-10
-tags: 
-  - "スイス"
-  - "チューリッヒ"
-  - "博物館"
+author: Rabbitflower
+categories: [Museum]
+tags: [スイス, チューリッヒ, チューリッヒ美術館, swiss, zurich]
 ---
 
 2013年10月10日
 
 チューリッヒ博物館
 
-スイス旅行に行った際に行くことができたチューリヒ博物館。
+スイス
+旅行に行った際に行くことができたチューリヒ博物館。  
 
-![](images/image-12.jpg)
+<img src="/assets/images/museum/2013-10-09-Zurich Museum-Munch/images/image-12.jpg"  width="400px">
 
-![](images/image-13.jpg)
+<img src="/assets/images/museum/2013-10-09-Zurich Museum-Munch/images/image-13.jpg"  width="400px">
 
-![](images/image-14.jpg)
+<img src="/assets/images/museum/2013-10-09-Zurich Museum-Munch/images/image-14.jpg"  width="400px">
 
-![](images/image-15.jpg)
+<img src="/assets/images/museum/2013-10-09-Zurich Museum-Munch/images/image-15.jpg"  width="400px">

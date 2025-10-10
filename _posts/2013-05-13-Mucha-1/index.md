@@ -11,8 +11,8 @@ tags:
 
 ミュシャ展@六本木ヒルズ森アーツセンターアートギャラリー
 
-![](images/image-7.jpg)
+<img src="/assets/images/museum/2013-05-13-Mucha-1/images/image-7.jpg " width="400px">
 
-![](images/image-8.jpg)
+<img src="/assets/images/museum/2013-05-13-Mucha-1/images/image-8.jpg " width="400px">
 
-![](images/image-9.jpg)
+<img src="/assets/images/museum/2013-05-13-Mucha-1/images/image-9.jpg " width="400px">
