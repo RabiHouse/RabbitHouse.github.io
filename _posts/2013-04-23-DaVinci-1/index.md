@@ -12,4 +12,3 @@ tags: [ダヴィンチ, DaVinci, 上野, 東京都美術館]
 
 ※行った日を憶えてないので開館初日の日を記載
 
-<img src="/assets/images/museum/2013-04-23-DaVinci-1/images/image-6.jpg"  width="400px">
