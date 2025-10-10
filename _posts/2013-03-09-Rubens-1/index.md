@@ -1,9 +1,9 @@
 ---
 title: "ルーベンス展 栄光のアントワープと原点のイタリア"
 date: 2013-03-09
-tags: 
-  - "bunkamura"
-  - "ルーベンス"
+author: Rabbitflower
+categories: [Museum]
+tags: [ルーベンス, Rubens]
 ---
 
 2013年3月9日
@@ -11,6 +11,6 @@ tags:
 ルーベンス展@Bunkamuraザ・ミュージアム  
 ※行った日を憶えてないので開館初日の日を記載
 
-![](assets/images/museum/2013-03-09-Rubens-1/image.jpg)
+<img src="assets/images/museum/2013-03-09-Rubens-1/image.jpg"  width="400px">
 
-![](assets/images/museum/2013-03-09-Rubens-1/image-1.jpg)
+<img src="assets/images/museum/2013-03-09-Rubens-1/image-1.jpg" width="400px">
