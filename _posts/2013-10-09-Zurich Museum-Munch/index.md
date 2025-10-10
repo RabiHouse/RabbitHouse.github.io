@@ -12,6 +12,6 @@ tags: [スイス, チューリッヒ, チューリッヒ美術館, ムンク, sw
 
 スイス旅行に行った際に行くことができたチューリヒ美術館。たまたまですがムンク店を開催していたので、常時展と企画展の両方を鑑賞。
 
-<img src="/assets/images/museum/2013-10-09-Zurich Museum-Munch/images/image-10.jpg"  width="400px">
+<img src="/assets/images/museum/2013-10-09-ZurichMuseum-Munch/images/image-10.jpg"  width="400px">
 
-<img src="/assets/images/museum/2013-10-09-Zurich Museum-Munch/images/image-11.jpg"  width="400px">
+<img src="/assets/images/museum/2013-10-09-ZurichMuseum-Munch/images/image-11.jpg"  width="400px">
