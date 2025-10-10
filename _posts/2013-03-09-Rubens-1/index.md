@@ -13,4 +13,4 @@ tags: [ルーベンス, Rubens]
 
 <img src="/assets/images/museum/2013-03-09-Rubens-1/images/image.jpg"  width="400px">
 
-<img src="https://timothy.rabbitflowerdiary.com/assets/images/museum/2013-03-09-Rubens-1/images/image-1.jpg" width="400px">
+<img src="/assets/images/museum/2013-03-09-Rubens-1/images/image-1.jpg" width="400px">
