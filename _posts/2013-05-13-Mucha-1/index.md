@@ -1,6 +1,8 @@
 ---
 title: "ミュシャ展 パリの夢 モラヴィアの祈り"
 date: 2013-05-13
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "ミュシャ"
   - "六本木"
