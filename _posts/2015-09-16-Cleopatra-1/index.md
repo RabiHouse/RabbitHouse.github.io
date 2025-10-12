@@ -1,6 +1,8 @@
 ---
 title: "クレオパトラとエジプトの王妃展"
 date: 2015-09-16
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "エジプト"
   - "クレオパトラ"
@@ -13,10 +15,14 @@ tags:
 
 レオパトラとエジプトの王妃展@東京国立博物館 平成館
 
-![](images/image-70.jpg)
+<img src="/assets/images/museum/2015-09-16-Cleopatra-1/images/image-70.jpg"  width="400px">
 
-![](images/image-71.jpg)
 
-![](images/image-72.jpg)
+<img src="/assets/images/museum/2015-09-16-Cleopatra-1/images/image-71.jpg"  width="400px">
 
-![](images/image-73.jpg)
+
+<img src="/assets/images/museum/2015-09-16-Cleopatra-1/images/image-72.jpg"  width="400px">
+
+
+<img src="/assets/images/museum/2015-09-16-Cleopatra-1/images/image-73.jpg"  width="400px">
+

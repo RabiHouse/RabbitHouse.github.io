@@ -12,5 +12,4 @@ tags:
 
 マグリット展@新国立美術館
 
-<img src="/assets/images/museum/images/2015-04-23-Magritte-1/images/image-67.jpg"  width="400px">
-)
+<img src="/assets/images/museum/2015-04-23-Magritte-1/images/image-67.jpg"  width="400px">

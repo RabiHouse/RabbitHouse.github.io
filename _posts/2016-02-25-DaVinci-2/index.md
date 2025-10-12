@@ -1,6 +1,8 @@
 ---
 title: "レオナルド・ダ・ヴィンチー天才の挑戦"
 date: 2016-02-25
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "ダ・ヴィンチ"
   - "レオナルド・ダ・ヴィンチ"
@@ -11,6 +13,8 @@ tags:
 
 ダ・ヴィンチ展@江戸東京博物館
 
-![](images/image-77.jpg)
+<img src="/assets/images/museum/2016-02-25-DaVinci-2/images/image-77.jpg"  width="400px">
 
-![](images/image-78.jpg)
+
+<img src="/assets/images/museum/2016-02-25-DaVinci-2/images/image-78.jpg"  width="400px">
+

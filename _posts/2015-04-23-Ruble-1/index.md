@@ -1,6 +1,8 @@
 ---
 title: "ルーブル美術館展"
 date: 2015-04-23
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "ルーヴル"
   - "国立新美術館"
@@ -10,4 +12,5 @@ tags:
 
 ルーブル美術館展@新国立美術館
 
-![](images/image-68.jpg)
+<img src="/assets/images/museum/2015-04-23-Ruble-1/images/image-68.jpg"  width="400px">
+
