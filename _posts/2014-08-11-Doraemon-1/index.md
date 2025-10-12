@@ -1,6 +1,9 @@
 ---
 title: "藤子・Ｆ・不二雄ミュージアム"
 date: 2014-08-11
+author: Rabbitflower
+categories: [Museum]
+
 tags: 
   - "川崎"
   - "登戸"
@@ -11,26 +14,26 @@ tags:
 
 藤子・Ｆ・不二雄ミュージアム
 
-![](images/image-34.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-34.jpg"  width="400px">
 
-![](images/image-35.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-35.jpg"  width="400px">
 
-![](images/image-36.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-36.jpg"  width="400px">
 
-![](images/image-37.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-37.jpg"  width="400px">
 
-![](images/image-38.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-38.jpg"  width="400px">
 
-![](images/image-39.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-39.jpg"  width="400px">
 
-![](images/image-40.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-40.jpg"  width="400px">
 
-![](images/image-41.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-41.jpg"  width="400px">
 
-![](images/image-42.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-42.jpg"  width="400px">
 
-![](images/image-43.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-43.jpg"  width="400px">
 
-![](images/image-44.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-44.jpg"  width="400px">
 
-![](images/image-45.jpg)
+<img src="/assets/images/museum/2014-08-11-Doraemon-1/images/image-45.jpg"  width="400px">
