@@ -1,6 +1,8 @@
 ---
 title: "オルセー美術館展～印象派の誕生"
 date: 2014-08-07
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "オルセー"
   - "六本木"
