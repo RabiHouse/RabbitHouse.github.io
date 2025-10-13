@@ -1,6 +1,8 @@
 ---
 title: "リサとガスパール展"
 date: 2017-04-05
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "リサとガスパール"
   - "新宿"
@@ -17,16 +19,16 @@ tags:
 
 <script async src="//www.instagram.com/embed.js"></script>
 
-![](images/image-110.jpg)
+<img src="/assets/images/museum/2017-04-05-LisaandGaspard-1/images/image-110.jpg"  width="400px">
 
-![](images/image-111.jpg)
+<img src="/assets/images/museum/2017-04-05-LisaandGaspard-1/images/image-111.jpg"  width="400px">
 
-![](images/image-112.jpg)
+<img src="/assets/images/museum/2017-04-05-LisaandGaspard-1/images/image-112.jpg"  width="400px">
 
-![](images/image-113.jpg)
+<img src="/assets/images/museum/2017-04-05-LisaandGaspard-1/images/image-113.jpg"  width="400px">
 
-![](images/image-114.jpg)
+<img src="/assets/images/museum/2017-04-05-LisaandGaspard-1/images/image-114.jpg"  width="400px">
 
 先着プレゼント
 
-![](images/image-115.jpg)
+<img src="/assets/images/museum/2017-04-05-LisaandGaspard-1/images/image-115.jpg"  width="400px">

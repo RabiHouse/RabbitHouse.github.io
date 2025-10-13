@@ -1,6 +1,8 @@
 ---
 title: "グレース・ケリー展"
 date: 2016-09-15
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "グレース・ケリー"
   - "モナコ"
@@ -15,12 +17,17 @@ tags:
 本人が着用したドレス・復元されたウェディングドレス。  
 グレース自身が制作した押し花、モナコ王宮での生活部屋の再現など。
 
-![](images/image-86.jpg)
+<img src="/assets/images/museum/2016-09-15-GraceKelly-1/images/image-86.jpg"  width="400px">
 
-![](images/image-87.jpg)
 
-![](images/image-88.jpg)
+<img src="/assets/images/museum/2016-09-15-GraceKelly-1/images/image-87.jpg"  width="400px">
 
-![](images/image-89.jpg)
 
-![](images/image-90.jpg)
+<img src="/assets/images/museum/2016-09-15-GraceKelly-1/images/image-88.jpg"  width="400px">
+
+
+<img src="/assets/images/museum/2016-09-15-GraceKelly-1/images/image-89.jpg"  width="400px">
+
+
+<img src="/assets/images/museum/2016-09-15-GraceKelly-1/images/image-90.jpg"  width="400px">
+
