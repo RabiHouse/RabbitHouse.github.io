@@ -1,6 +1,8 @@
 ---
 title: "最後の印象派 1900-20’sParis"
 date: 2015-11-07
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "パリ"
   - "フランス"

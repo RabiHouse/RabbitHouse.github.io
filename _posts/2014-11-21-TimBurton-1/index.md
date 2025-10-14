@@ -1,6 +1,8 @@
 ---
 title: "ティム・バートンの世界展"
 date: 2014-11-21
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "ティム・バートン"
   - "六本木"

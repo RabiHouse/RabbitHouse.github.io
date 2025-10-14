@@ -8,9 +8,8 @@ image: assets/images/Illust/berry/11.gif
 ---
 
 🖼️ Frame Illust  
-フレームはオリジナルのデザインを一点ずつ模様を施し、うさぎのパーツが付いております。  
+フレームはオリジナルのデザインを一点ずつ模様を施し、うさぎのパーツが付いております。 <!--more--> 
 ペイントデザイン・うさぎのパーツはランダムで完成品の画像が掲載されていない場合もございます。  
-<!--more-->
 
 <div style="text-align: center;"><a target="_blank" href="https://minne.com/@rabbitrabiko" class="btn btn-success">minne</a></div>  <br>
 <br>

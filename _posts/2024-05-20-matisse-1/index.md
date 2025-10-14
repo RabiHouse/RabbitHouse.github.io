@@ -5,7 +5,7 @@ author: Rabbitflower
 categories: [Museum]
 tags: [matisse, マティス, フォルム, 世界, デザイン, 絵画, 六本木, 国立新美術館, 世界観]
 ---
-
+マティス @国立新美術館
 <img src="/assets/images/museum/2024-05-20-matisse-1/images/20240520_120336.jpg"  width="400px">
 
 <img src="/assets/images/museum/2024-05-20-matisse-1/images/20240520_120348-1.jpg"  width="400px">

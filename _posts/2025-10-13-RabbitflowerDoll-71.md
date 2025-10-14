@@ -8,7 +8,7 @@ image: assets/images/webp/nft2.webp
 ---
 
 💐 Rabbitflower Doll#71 ~ Call  
-Delight in everything that happened today.  
+This is the last call.    
 <!--more-->
 <div style="text-align: center;"><a target="_blank" href="https://xrp.cafe/nft/000827108D3BB1B5DD412C0BC897016FC961D66C06CB9E9CB0B03AC604DB452C" class="btn btn-primary">xrp.cafe</a></div>  
 <br>

@@ -1,6 +1,8 @@
 ---
 title: "菱田春草展"
 date: 2014-09-23
+author: Rabbitflower
+categories: [Museum]
 tags: 
   - "東京国立近代美術館"
   - "菱田春草"
