@@ -34,14 +34,14 @@ tags:
 
 作品数は多すぎず、作品に見応えがあるものが多かったので見終わった後の満足感はとてもありました。
 
-<img src="/assets/images/2018-03-22-Velázquez-1/images/image-143.jpg"  width="400px">
+<img src="/assets/images/2018-03-22-Velázquez-1/museum/images/image-143.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Velázquez-1/images/image-144.jpg"  width="400px">
+<img src="/assets/images/2018-03-22-Velázquez-1/museum/images/image-144.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Velázquez-1/images/image-145.jpg"  width="400px">
+<img src="/assets/images/2018-03-22-Velázquez-1/museum/images/image-145.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Velázquez-1/images/image-146.jpg"  width="400px">
+<img src="/assets/images/2018-03-22-Velázquez-1/museum/images/image-146.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Velázquez-1/images/image-147.jpg"  width="400px">
+<img src="/assets/images/2018-03-22-Velázquez-1/museum/images/image-147.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Velázquez-1/images/image-148.jpg"  width="400px">
+<img src="/assets/images/2018-03-22-Velázquez-1/museum/images/image-148.jpg"  width="400px">

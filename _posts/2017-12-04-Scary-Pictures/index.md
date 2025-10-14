@@ -29,12 +29,12 @@ tags:
 
 前回入り損ねたときよりも開館時間が延長されて20時までになっていた。
 
-<img src="/assets/images/2017-12-04-Scary-Pictures/images/image-138.jpg"  width="400px">
+<img src="/assets/images/2017-12-04-Scary-Pictures/museum/images/image-138.jpg"  width="400px">
 
-<img src="/assets/images/2017-12-04-Scary-Pictures/images/image-139.jpg"  width="400px">
+<img src="/assets/images/2017-12-04-Scary-Pictures/museum/images/image-139.jpg"  width="400px">
 
-<img src="/assets/images/2017-12-04-Scary-Pictures/images/image-140.jpg"  width="400px">
+<img src="/assets/images/2017-12-04-Scary-Pictures/museum/images/image-140.jpg"  width="400px">
 
-<img src="/assets/images/2017-12-04-Scary-Pictures/images/image-141.jpg"  width="400px">
+<img src="/assets/images/2017-12-04-Scary-Pictures/museum/images/image-141.jpg"  width="400px">
 
-<img src="/assets/images/2017-12-04-Scary-Pictures/images/image-142.jpg"  width="400px">
+<img src="/assets/images/2017-12-04-Scary-Pictures/museum/images/image-142.jpg"  width="400px">
