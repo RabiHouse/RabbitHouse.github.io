@@ -29,16 +29,16 @@ tags:
 
 色が・・やっぱり作品を見るのとは違って写ってしまう。
 
-<img src="/assets/images/2018-04-23-Bührle-1/museum/images/image-158.jpg"  width="400px">
+<img src="/assets/images/museum/2018-04-23-Bührle-1/images/image-158.jpg"  width="400px">
 
-<img src="/assets/images/2018-04-23-Bührle-1/museum/images/image-159.jpg"  width="400px">
+<img src="/assets/images/museum/2018-04-23-Bührle-1/images/image-159.jpg"  width="400px">
 
-<img src="/assets/images/2018-04-23-Bührle-1/museum/images/image-160.jpg"  width="400px">
+<img src="/assets/images/museum/2018-04-23-Bührle-1/images/image-160.jpg"  width="400px">
 
-<img src="/assets/images/2018-04-23-Bührle-1/museum/images/image-161.jpg"  width="400px">
+<img src="/assets/images/museum/2018-04-23-Bührle-1/images/image-161.jpg"  width="400px">
 
-<img src="/assets/images/2018-04-23-Bührle-1/museum/images/image-162.jpg"  width="400px">
+<img src="/assets/images/museum/2018-04-23-Bührle-1/images/image-162.jpg"  width="400px">
 
-<img src="/assets/images/2018-04-23-Bührle-1/museum/images/image-163.jpg"  width="400px">
+<img src="/assets/images/museum/2018-04-23-Bührle-1/images/image-163.jpg"  width="400px">
 
-<img src="/assets/images/2018-04-23-Bührle-1/museum/images/image-164.jpg"  width="400px">
+<img src="/assets/images/museum/2018-04-23-Bührle-1/images/image-164.jpg"  width="400px">

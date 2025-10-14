@@ -29,20 +29,20 @@ tags:
 
 カンバスではなくて腐敗が進みにくいということで、銅板や大理石などに描いていたり、素材自体にもこだわりがあってそれだけで作品の雰囲気が変わっていたりして面白かったです。
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-149.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-149.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-150.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-150.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-151.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-151.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-152.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-152.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-153.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-153.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-154.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-154.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-155.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-155.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-156.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-156.jpg"  width="400px">
 
-<img src="/assets/images/2018-03-22-Bruegel-1/museum/images/image-157.jpg"  width="400px">
+<img src="/assets/images/museum/2018-03-22-Bruegel-1/images/image-157.jpg"  width="400px">

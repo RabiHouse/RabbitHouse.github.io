@@ -24,10 +24,10 @@ tags:
 
 でも実はアルチンボルド自体の作品は全体の半分くらいだった気がする・・。気のせいかな。
 
-<img src="/assets/images/2017-09-21-Arcimboldo-1/museum/images/image-128.jpg"  width="400px">
+<img src="/assets/images/museum/i2017-09-21-Arcimboldo-1/images/image-128.jpg"  width="400px">
 
-<img src="/assets/images/2017-09-21-Arcimboldo-1/museum/images/image-129.jpg"  width="400px">
+<img src="/assets/images/museum/i2017-09-21-Arcimboldo-1/images/image-129.jpg"  width="400px">
 
-<img src="/assets/images/2017-09-21-Arcimboldo-1/museum/images/image-130.jpg"  width="400px">
+<img src="/assets/images/museum/i2017-09-21-Arcimboldo-1/images/image-130.jpg"  width="400px">
 
-<img src="/assets/images/2017-09-21-Arcimboldo-1/museum/images/image-131.jpg"  width="400px">
+<img src="/assets/images/museum/i2017-09-21-Arcimboldo-1/images/image-131.jpg"  width="400px">
