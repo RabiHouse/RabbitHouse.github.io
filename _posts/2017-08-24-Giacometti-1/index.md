@@ -22,11 +22,9 @@ tags:
 
 いつもこのくらいの混みだとありがたいのですが。
 
-<img src="/assets/images/museum/i2017-08-24-Giacometti-1/mages/image-125.jpg"  width="400px">
+<img src="/assets/images/museum/2017-08-24-Giacometti-1/images/image-125.jpg"  width="400px">
+         
+<img src="/assets/images/museum/2017-08-24-Giacometti-1/images/image-126.jpg"  width="400px">
 
-
-<img src="/assets/images/museum/i2017-08-24-Giacometti-1/images/image-126.jpg"  width="400px">
-
-
-<img src="/assets/images/museum/i2017-08-24-Giacometti-1/images/image-127.jpg"  width="400px">
+<img src="/assets/images/museum/2017-08-24-Giacometti-1/images/image-127.jpg"  width="400px">
 

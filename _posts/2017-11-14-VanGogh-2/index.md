@@ -23,14 +23,14 @@ tags:
 
 時間ももうなかったので今回は諦めてまた上野まで来るしかないか・。。
 
-<img src="/assets/images/museum/i2017-11-14-VanGogh-2/images/image-132.jpg"  width="400px">
+<img src="/assets/images/museum/2017-11-14-VanGogh-2/images/image-132.jpg"  width="400px">
 
-<img src="/assets/images/museum/i2017-11-14-VanGogh-2/images/image-133.jpg"  width="400px">
+<img src="/assets/images/museum/2017-11-14-VanGogh-2/images/image-133.jpg"  width="400px">
 
-<img src="/assets/images/museum/i2017-11-14-VanGogh-2/images/image-134.jpg"  width="400px">
+<img src="/assets/images/museum/2017-11-14-VanGogh-2/images/image-134.jpg"  width="400px">
 
-<img src="/assets/images/museum/i2017-11-14-VanGogh-2/images/image-135.jpg"  width="400px">
+<img src="/assets/images/museum/2017-11-14-VanGogh-2/images/image-135.jpg"  width="400px">
 
-<img src="/assets/images/museum/i2017-11-14-VanGogh-2/images/image-136.jpg"  width="400px">
+<img src="/assets/images/museum/2017-11-14-VanGogh-2/images/image-136.jpg"  width="400px">
 
-<img src="/assets/images/museum/i2017-11-14-VanGogh-2/images/image-137.jpg"  width="400px">
+<img src="/assets/images/museum/2017-11-14-VanGogh-2/images/image-137.jpg"  width="400px">
