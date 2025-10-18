@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Rabbitflower Doll#71 ~ Call"
+title:  "Rabbitflower Doll#72"
 author: Rabbitflower
 categories: [NFT, illust, RabbitflowerDoll]
 tags: [NFT, comic, girl, illust, xrp.cafe, xrp]
