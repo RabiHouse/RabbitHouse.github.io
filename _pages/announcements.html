@@ -685,10 +685,8 @@
       profileImageUrl: "https://pbs.twimg.com/profile_images/1992662209349226497/n3RB34ap_400x400.jpg",
       adminPasswordHash: "e92fec58f34cd99929ba4a98ef9197bf3dde38736b903fe3f43bc36dc1e95b4e", // Set your password hash here
       
-      // Google Sheets API Configuration
-      googleSheetsApiKey: "AIzaSyBQBibwN_yzn9YMXengo-JlUWT1ROcUK-I",
-      spreadsheetId: "1U5FHp7Mhr6p292pIRS3zjQYi4siyyE5bLkahrLhfFmM",
-      sheetName: "Announcements" // Sheet tab name
+      // Google Apps Script URL
+      scriptUrl: "https://script.google.com/macros/s/AKfycbz9bvPcqQQ-4y_G6ZQLRBY1rNgjismDQwAVM8omtNuZiANcYYdW4molVASj2FzFITa3/exec"
     };
     // ========================================
 
@@ -699,41 +697,34 @@
     let activeCategory = 'all';
     let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
-    const categories = ['🎵 Music', '🎞️ Movie', '🎨 NFT', '📰 News', '✨ Goods', '🐰 Misc'];
+    const categories = ['🎵 Music', '🎞️ Movie', '🎨 NFT', '📰 News', '🛍️ Goods', '🐰 Misc'];
 
-    // Google Sheets API Functions
-    async function loadAnnouncementsFromSheet() {
+    // Google Apps Script API Functions
+    async function loadAnnouncementsFromScript() {
       try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}/values/${CONFIG.sheetName}?key=${CONFIG.googleSheetsApiKey}`;
-        const response = await fetch(url);
+        console.log('Loading from:', CONFIG.scriptUrl);
+        
+        const response = await fetch(CONFIG.scriptUrl, {
+          method: 'GET',
+          redirect: 'follow'
+        });
+        
+        console.log('Load response status:', response.status);
         
         if (!response.ok) {
-          if (response.status === 404) {
-            // Sheet doesn't exist yet, create it
-            await createSheet();
-            return [];
-          }
+          const errorText = await response.text();
+          console.error('Load error:', errorText);
           throw new Error('Failed to load data');
         }
         
         const data = await response.json();
+        console.log('Loaded data:', data);
         
-        if (!data.values || data.values.length <= 1) {
+        if (!data.values || data.values.length === 0) {
           return [];
         }
         
-        // Skip header row and convert to objects
-        const announcements = data.values.slice(1).map((row, index) => ({
-          id: row[0] || `row-${index}`,
-          content: row[1] || '',
-          imageUrl: row[2] || '',
-          embedCode: row[3] || '',
-          category: row[4] || '',
-          timestamp: parseInt(row[5]) || Date.now(),
-          pinned: row[6] === 'TRUE'
-        }));
-        
-        return announcements;
+        return data.values;
       } catch (error) {
         console.error('Error loading announcements:', error);
         showToast('データの読み込みに失敗しました');
@@ -741,55 +732,45 @@
       }
     }
 
-    async function createSheet() {
+    async function saveAllAnnouncementsToScript() {
       try {
-        // Initialize with headers
-        const headers = [['id', 'content', 'imageUrl', 'embedCode', 'category', 'timestamp', 'pinned']];
-        await saveToSheet(headers);
-      } catch (error) {
-        console.error('Error creating sheet:', error);
-      }
-    }
-
-    async function saveToSheet(data) {
-      try {
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}/values/${CONFIG.sheetName}?valueInputOption=RAW&key=${CONFIG.googleSheetsApiKey}`;
+        console.log('Saving to:', CONFIG.scriptUrl);
+        console.log('Data to save:', allAnnouncements);
         
-        const response = await fetch(url, {
-          method: 'PUT',
+        const response = await fetch(CONFIG.scriptUrl, {
+          method: 'POST',
+          redirect: 'follow',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'text/plain',
           },
           body: JSON.stringify({
-            values: data
+            announcements: allAnnouncements
           })
         });
         
+        console.log('Save response status:', response.status);
+        
+        const resultText = await response.text();
+        console.log('Save response text:', resultText);
+        
         if (!response.ok) {
+          console.error('Save error response:', resultText);
           throw new Error('Failed to save data');
+        }
+        
+        const result = JSON.parse(resultText);
+        console.log('Save result:', result);
+        
+        if (result.error) {
+          throw new Error(result.error);
         }
         
         return true;
       } catch (error) {
-        console.error('Error saving to sheet:', error);
-        showToast('データの保存に失敗しました');
+        console.error('Error saving announcements:', error);
+        showToast('データの保存に失敗しました: ' + error.message);
         return false;
       }
-    }
-
-    async function saveAllAnnouncements() {
-      const headers = [['id', 'content', 'imageUrl', 'embedCode', 'category', 'timestamp', 'pinned']];
-      const rows = allAnnouncements.map(a => [
-        a.id,
-        a.content,
-        a.imageUrl,
-        a.embedCode,
-        a.category,
-        a.timestamp.toString(),
-        a.pinned ? 'TRUE' : 'FALSE'
-      ]);
-      
-      return await saveToSheet([...headers, ...rows]);
     }
 
     async function initializeApp() {
@@ -799,8 +780,8 @@
       
       updateAdminUI();
       
-      // Load data from Google Sheets
-      allAnnouncements = await loadAnnouncementsFromSheet();
+      // Load data from Google Apps Script
+      allAnnouncements = await loadAnnouncementsFromScript();
       filterAndDisplayAnnouncements();
       updateCategories();
     }
@@ -1077,7 +1058,7 @@
 
       announcement.pinned = !announcement.pinned;
       
-      const success = await saveAllAnnouncements();
+      const success = await saveAllAnnouncementsToScript();
       if (success) {
         filterAndDisplayAnnouncements();
         showToast(announcement.pinned ? 'ピン留めしました' : 'ピン留めを解除しました');
@@ -1171,7 +1152,7 @@
           announcement.embedCode = embedCode;
           announcement.category = category;
           
-          const success = await saveAllAnnouncements();
+          const success = await saveAllAnnouncementsToScript();
           if (success) {
             hideAddForm();
             filterAndDisplayAnnouncements();
@@ -1195,7 +1176,7 @@
 
         allAnnouncements.push(newAnnouncement);
         
-        const success = await saveAllAnnouncements();
+        const success = await saveAllAnnouncementsToScript();
         if (success) {
           hideAddForm();
           filterAndDisplayAnnouncements();
@@ -1230,16 +1211,17 @@
       const index = allAnnouncements.findIndex(a => a.id === announcementId);
       if (index === -1) return;
 
+      const deletedAnnouncement = allAnnouncements[index];
       allAnnouncements.splice(index, 1);
       
-      const success = await saveAllAnnouncements();
+      const success = await saveAllAnnouncementsToScript();
       if (success) {
         filterAndDisplayAnnouncements();
         updateCategories();
         showToast('削除しました');
       } else {
         // Restore on failure
-        allAnnouncements.splice(index, 0, announcement);
+        allAnnouncements.splice(index, 0, deletedAnnouncement);
       }
     }
 
@@ -1257,5 +1239,5 @@
 
     initializeApp();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a681d2e70f52635',t:'MTc2NDQ4MjMxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6882b7e6299802',t:'MTc2NDQ4NjQ3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
