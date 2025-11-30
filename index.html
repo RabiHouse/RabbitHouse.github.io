@@ -1,69 +1,1222 @@
----
-layout: default
-title: Home
----
+<!doctype html>
+<html lang="ja">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Announcements</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffeef8 0%, #e6e9ff 100%);
+      min-height: 100%;
+      height: 100%;
+    }
 
-{% if page.url == "/" %}
+    html {
+      height: 100%;
+    }
 
+    .site-wrapper {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      min-height: 100%;
+    }
 
-<div><a target="_blank" href="https://timothy.rabbitflowerdiary.com/_pages/announcements.html" class="btn btn-primary">My Note</a></div>  
+    .site-header {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px rgba(255, 105, 180, 0.15);
+      text-align: center;
+    }
 
-<!-- Featured
-================================================== -->
-<section class="featured-posts">
-    <div class="section-title">
-        <h2><span>Featured</span></h2>
+    .site-icon {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .site-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2d2d2d;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .site-description {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.6;
+      margin: 0 0 1rem 0;
+    }
+
+    .top-link {
+      display: inline-block;
+      color: #ffb6d9;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      border: 2px solid #ffb6d9;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      margin-bottom: 0.5rem;
+    }
+
+    .top-link:hover {
+      background: #ffb6d9;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+    }
+
+    .admin-controls {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 2px solid #f0e6f6;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .admin-login-btn, .hash-generator-btn {
+      background: #ffb6d9;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+    }
+
+    .hash-generator-btn {
+      background: #4ecdc4;
+      box-shadow: 0 4px 12px rgba(78, 205, 196, 0.2);
+    }
+
+    .admin-login-btn:hover, .hash-generator-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 105, 180, 0.3);
+    }
+
+    .hash-generator-btn:hover {
+      background: #45b8af;
+      box-shadow: 0 6px 16px rgba(78, 205, 196, 0.3);
+    }
+
+    .admin-logout-btn {
+      background: #f0f0f0;
+      color: #666;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .admin-logout-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .controls-bar {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.12);
+    }
+
+    .filters-container {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: #f0f0f0;
+      color: #666;
+      border: 2px solid transparent;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .filter-btn.active {
+      background: #ffb6d9;
+      color: #ffffff;
+      border-color: #ffb6d9;
+    }
+
+    .announcements-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .announcements-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .announcements-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2d2d2d;
+      margin: 0;
+    }
+
+    .add-announcement-btn {
+      background: #ffb6d9;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+      white-space: nowrap;
+    }
+
+    .add-announcement-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 105, 180, 0.3);
+      background: #ffa6c1;
+    }
+
+    .add-announcement-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .announcement-form {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px rgba(255, 105, 180, 0.15);
+    }
+
+    .form-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2d2d2d;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #2d2d2d;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.875rem;
+      border: 2px solid #f0e6f6;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+      background: #fafafa;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #ffb6d9;
+      background: #ffffff;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+      line-height: 1.6;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-buttons button {
+      flex: 1;
+      padding: 0.875rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn {
+      background: #ffb6d9;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 105, 180, 0.3);
+      background: #ffa6c1;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .cancel-btn {
+      background: #f0f0f0;
+      color: #666;
+    }
+
+    .cancel-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .announcements-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .announcement-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.12);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .announcement-card.pinned {
+      border: 3px solid #ffd93d;
+      box-shadow: 0 8px 24px rgba(255, 217, 61, 0.3);
+    }
+
+    .announcement-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(255, 105, 180, 0.2);
+    }
+
+    .pin-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #ffd93d;
+      color: #333;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(255, 217, 61, 0.4);
+    }
+
+    .announcement-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .announcement-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffb6d9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
+    }
+
+    .announcement-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .announcement-meta {
+      flex: 1;
+    }
+
+    .announcement-info {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #999;
+      flex-wrap: wrap;
+    }
+
+    .announcement-category {
+      background: #ffb6d9;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .announcement-content {
+      color: #2d2d2d;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin: 1.5rem 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .embed-container {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .announcement-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #f0e6f6;
+    }
+
+    .edit-btn, .delete-btn, .pin-btn {
+      background: #ffa6c1;
+      color: #ffffff;
+      border: none;
+      padding: 0.625rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+
+    .pin-btn {
+      background: #ffd93d;
+      color: #333;
+    }
+
+    .edit-btn {
+      background: #4ecdc4;
+    }
+
+    .edit-btn:hover:not(:disabled), 
+    .delete-btn:hover:not(:disabled), 
+    .pin-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+
+    .edit-btn:disabled, 
+    .delete-btn:disabled, 
+    .pin-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content h3 {
+      margin: 0 0 1rem 0;
+      color: #2d2d2d;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.875rem;
+      border: 2px solid #f0e6f6;
+      border-radius: 12px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+
+    .modal-content textarea {
+      width: 100%;
+      padding: 0.875rem;
+      border: 2px solid #f0e6f6;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-family: monospace;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+      background: #f9f9f9;
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .modal-buttons button {
+      flex: 1;
+      padding: 0.875rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .modal-buttons .primary-btn {
+      background: #ffb6d9;
+      color: white;
+    }
+
+    .modal-buttons .secondary-btn {
+      background: #f0f0f0;
+      color: #666;
+    }
+
+    .modal-buttons .copy-btn {
+      background: #4ecdc4;
+      color: white;
+    }
+
+    .modal-buttons .copy-btn:hover {
+      background: #45b8af;
+    }
+
+    .info-text {
+      background: #fff8e1;
+      border-left: 4px solid #ffd93d;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.12);
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .empty-text {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2d2d2d;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 640px) {
+      .site-wrapper {
+        padding: 1.5rem 1rem;
+      }
+
+      .site-header {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .site-title {
+        font-size: 1.6rem;
+      }
+
+      .announcements-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+      }
+
+      .add-announcement-btn {
+        width: 100%;
+      }
+
+      .filters-container {
+        gap: 0.5rem;
+      }
+
+      .filter-btn {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .announcement-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="site-wrapper">
+   <div class="site-header">
+    <div class="site-icon">
+     🐰
     </div>
-    <div class="row">
-
-    {% for post in site.posts %}
-
-        {% if post.featured == true %}
-
-            {% include featuredbox.html %}
-
-        {% endif %}
-
-    {% endfor %}
-
+    <h1 class="site-title" id="siteTitle">Rabbitflower</h1>
+    <p class="site-description" id="siteDescription">🐰💐my notice💐🐰</p><a href="https://timothy.rabbitflowerdiary.com/" class="top-link" target="_blank" rel="noopener noreferrer">TOP</a>
+    <div class="admin-controls"><button class="admin-login-btn" id="adminLoginBtn" style="display: block;">🔑 Admin Login</button> <button class="hash-generator-btn" id="hashGeneratorBtn">🔧 Generate Password Hash</button> <button class="admin-logout-btn" id="adminLogoutBtn" style="display: none;">🚪 Logout</button>
     </div>
-</section>
-
-{% endif %}
-
-<!-- Posts Index
-================================================== -->
-<section class="recent-posts">
-
-    <div class="section-title">
-
-        <h2><span>All Posts</span></h2>
-
+   </div>
+   <div class="controls-bar">
+    <div class="filters-container" id="filtersContainer"><button class="filter-btn active" data-category="all">All</button>
     </div>
-
-    <div class="row listrecent">
-
-        {% for post in paginator.posts %}
-
-        {% include postbox.html %}
-
-        {% endfor %}
-
+   </div>
+   <div class="announcements-section">
+    <div class="announcements-header">
+     <h2 class="announcements-title" id="announcementsTitle">Latest Announcements</h2><button class="add-announcement-btn" id="addAnnouncementBtn" style="display: none;">➕ New Post</button>
     </div>
+    <div id="formContainer"></div>
+    <div id="announcementsContainer"></div>
+   </div>
+  </div>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script>
+    // ========================================
+    // CONFIGURATION
+    // ========================================
+    const CONFIG = {
+      siteTitle: "Rabbitflower",
+      siteDescription: "🐰💐my notice💐🐰",
+      announcementsTitle: "Latest Announcements",
+      profileImageUrl: "https://pbs.twimg.com/profile_images/1992662209349226497/n3RB34ap_400x400.jpg",
+      adminPasswordHash: "e92fec58f34cd99929ba4a98ef9197bf3dde38736b903fe3f43bc36dc1e95b4e", // Set your password hash here
+      
+      // Google Apps Script URL
+      scriptUrl: "https://script.google.com/macros/s/AKfycbz9bvPcqQQ-4y_G6ZQLRBY1rNgjismDQwAVM8omtNuZiANcYYdW4molVASj2FzFITa3/exec"
+    };
+    // ========================================
 
-</section>
+    let allAnnouncements = [];
+    let currentAnnouncements = [];
+    let showForm = false;
+    let editingAnnouncementId = null;
+    let activeCategory = 'all';
+    let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
+    const categories = ['🎵 Music', '🎞️ Movie', '🎨 NFT', '📰 News', '✨ Goods', '🐰 Misc'];
 
-<!-- Pagination
-================================================== -->
-<div class="bottompagination">
-<div class="pointerup"><i class="fa fa-caret-up"></i></div>
-<span class="navigation" role="navigation">
-    {% include pagination.html %}
-</span>
-</div>
-<dr><dr>
+    // Google Apps Script API Functions
+    async function loadAnnouncementsFromScript() {
+      try {
+        const response = await fetch(CONFIG.scriptUrl);
+        
+        if (!response.ok) {
+          throw new Error('Failed to load data');
+        }
+        
+        const data = await response.json();
+        
+        if (!data.values || data.values.length === 0) {
+          return [];
+        }
+        
+        return data.values;
+      } catch (error) {
+        console.error('Error loading announcements:', error);
+        showToast('データの読み込みに失敗しました');
+        return [];
+      }
+    }
 
+    async function saveAllAnnouncementsToScript() {
+      try {
+        const response = await fetch(CONFIG.scriptUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            announcements: allAnnouncements
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to save data');
+        }
+        
+        const result = await response.json();
+        
+        if (result.error) {
+          throw new Error(result.error);
+        }
+        
+        return true;
+      } catch (error) {
+        console.error('Error saving announcements:', error);
+        showToast('データの保存に失敗しました');
+        return false;
+      }
+    }
 
+    async function initializeApp() {
+      document.getElementById('siteTitle').textContent = CONFIG.siteTitle;
+      document.getElementById('siteDescription').textContent = CONFIG.siteDescription;
+      document.getElementById('announcementsTitle').textContent = CONFIG.announcementsTitle;
+      
+      updateAdminUI();
+      
+      // Load data from Google Apps Script
+      allAnnouncements = await loadAnnouncementsFromScript();
+      filterAndDisplayAnnouncements();
+      updateCategories();
+    }
 
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashHex;
+    }
 
+    function updateCategories() {
+      const usedCategories = [...new Set(allAnnouncements.map(a => a.category).filter(Boolean))];
+      const filtersContainer = document.getElementById('filtersContainer');
+      
+      const allBtn = filtersContainer.querySelector('[data-category="all"]');
+      filtersContainer.innerHTML = '';
+      filtersContainer.appendChild(allBtn);
+      
+      categories.forEach(cat => {
+        if (usedCategories.includes(cat)) {
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.dataset.category = cat;
+          btn.textContent = cat;
+          btn.onclick = () => filterByCategory(cat);
+          filtersContainer.appendChild(btn);
+        }
+      });
+    }
+
+    function filterByCategory(category) {
+      activeCategory = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === category);
+      });
+      filterAndDisplayAnnouncements();
+    }
+
+    function filterAndDisplayAnnouncements() {
+      let filtered = [...allAnnouncements].sort((a, b) => {
+        if (a.pinned !== b.pinned) return b.pinned ? 1 : -1;
+        return b.timestamp - a.timestamp;
+      });
+
+      if (activeCategory !== 'all') {
+        filtered = filtered.filter(a => a.category === activeCategory);
+      }
+
+      currentAnnouncements = filtered;
+      renderAnnouncements();
+    }
+
+    document.getElementById('hashGeneratorBtn').addEventListener('click', showHashGenerator);
+
+    function showHashGenerator() {
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <h3>🔧 Password Hash Generator</h3>
+          <div class="info-text">
+            <strong>手順:</strong><br>
+            1. 下にパスワードを入力<br>
+            2. 「Generate Hash」をクリック<br>
+            3. 生成されたハッシュをコピー<br>
+            4. CONFIG.adminPasswordHashに貼り付け
+          </div>
+          <input type="password" id="passwordToHash" placeholder="パスワードを入力">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2d2d2d;">生成されたハッシュ:</label>
+          <textarea id="generatedHash" readonly placeholder="ここにハッシュが表示されます..."></textarea>
+          <div class="modal-buttons">
+            <button class="primary-btn" onclick="generateHash()">Generate Hash</button>
+            <button class="copy-btn" onclick="copyHash()" id="copyHashBtn" style="display: none;">Copy Hash</button>
+            <button class="secondary-btn" onclick="closeModal(this)">Close</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(modal.querySelector('button'));
+      });
+    }
+
+    async function generateHash() {
+      const password = document.getElementById('passwordToHash').value;
+      if (!password) {
+        showToast('パスワードを入力してください');
+        return;
+      }
+      
+      const hash = await hashPassword(password);
+      document.getElementById('generatedHash').value = hash;
+      document.getElementById('copyHashBtn').style.display = 'block';
+      showToast('ハッシュを生成しました！');
+    }
+
+    function copyHash() {
+      const hashText = document.getElementById('generatedHash').value;
+      if (!hashText) {
+        showToast('コピーするハッシュがありません');
+        return;
+      }
+      
+      navigator.clipboard.writeText(hashText).then(() => {
+        showToast('クリップボードにコピーしました！');
+      });
+    }
+
+    window.generateHash = generateHash;
+    window.copyHash = copyHash;
+
+    document.getElementById('adminLoginBtn').addEventListener('click', showAdminLoginModal);
+    document.getElementById('adminLogoutBtn').addEventListener('click', logoutAdmin);
+
+    function showAdminLoginModal() {
+      if (!CONFIG.adminPasswordHash) {
+        showModal({
+          title: '⚠️ パスワードが設定されていません',
+          message: '先に「Generate Password Hash」ボタンでハッシュを生成し、CONFIG.adminPasswordHashに設定してください。',
+          buttons: [{text: 'OK', primary: true}]
+        });
+        return;
+      }
+
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <h3>🔑 Admin Login</h3>
+          <input type="password" id="passwordInput" placeholder="パスワードを入力">
+          <div class="modal-buttons">
+            <button class="primary-btn" onclick="verifyAdminPassword()">Login</button>
+            <button class="secondary-btn" onclick="closeModal(this)">Cancel</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(modal.querySelector('button'));
+      });
+    }
+
+    async function verifyAdminPassword() {
+      const inputPassword = document.getElementById('passwordInput').value;
+      const inputHash = await hashPassword(inputPassword);
+      
+      if (inputHash === CONFIG.adminPasswordHash) {
+        isAdmin = true;
+        sessionStorage.setItem('isAdmin', 'true');
+        document.querySelector('.modal-overlay').remove();
+        updateAdminUI();
+        showToast('ログインしました');
+      } else {
+        showToast('パスワードが正しくありません');
+      }
+    }
+
+    window.verifyAdminPassword = verifyAdminPassword;
+
+    function logoutAdmin() {
+      isAdmin = false;
+      sessionStorage.removeItem('isAdmin');
+      updateAdminUI();
+      hideAddForm();
+      showToast('ログアウトしました');
+    }
+
+    function updateAdminUI() {
+      document.getElementById('adminLoginBtn').style.display = isAdmin ? 'none' : 'block';
+      document.getElementById('adminLogoutBtn').style.display = isAdmin ? 'block' : 'none';
+      document.getElementById('addAnnouncementBtn').style.display = isAdmin ? 'block' : 'none';
+      filterAndDisplayAnnouncements();
+    }
+
+    function closeModal(button) {
+      button.closest('.modal-overlay').remove();
+    }
+
+    window.closeModal = closeModal;
+
+    function showModal({title, message, buttons}) {
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <h3>${title}</h3>
+          <p style="color: #666; margin-bottom: 1.5rem;">${message}</p>
+          <div class="modal-buttons">
+            ${buttons.map(btn => `
+              <button class="${btn.primary ? 'primary-btn' : 'secondary-btn'}" onclick="closeModal(this)">${btn.text}</button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function formatDate(timestamp) {
+      const date = new Date(timestamp);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function linkifyText(text) {
+      const urlRegex = /(https?:\/\/[^\s]+)/g;
+      return text.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #ffb6d9; text-decoration: underline;">$1</a>');
+    }
+
+    function renderAnnouncements() {
+      const container = document.getElementById('announcementsContainer');
+      
+      if (currentAnnouncements.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p class="empty-text">まだお知らせがありません</p>
+          </div>
+        `;
+        return;
+      }
+
+      const profileImage = CONFIG.profileImageUrl;
+      
+      const announcementsHTML = currentAnnouncements.map(announcement => {
+        const avatarHTML = profileImage 
+          ? `<div class="announcement-avatar"><img src="${profileImage}" alt="Profile" onerror="this.style.display='none'; this.parentElement.innerHTML='📢';"></div>`
+          : `<div class="announcement-avatar">📢</div>`;
+        
+        const imageHTML = announcement.imageUrl ? `<div style="margin: 1rem 0;"><img src="${announcement.imageUrl}" alt="Post image" style="max-width: 100%; border-radius: 12px; display: block;" onerror="this.style.display='none';"></div>` : '';
+        const embedHTML = announcement.embedCode ? `<div class="embed-container">${announcement.embedCode}</div>` : '';
+        const contentHTML = announcement.content ? `<div class="announcement-content">${linkifyText(announcement.content)}</div>` : '';
+        
+        return `
+          <div class="announcement-card ${announcement.pinned ? 'pinned' : ''}" data-id="${announcement.id}">
+            ${announcement.pinned ? '<div class="pin-badge">📌 Pinned</div>' : ''}
+            <div class="announcement-header">
+              ${avatarHTML}
+              <div class="announcement-meta">
+                <div class="announcement-info">
+                  ${announcement.category ? `<span class="announcement-category">${announcement.category}</span>` : ''}
+                  <span>${formatDate(announcement.timestamp)}</span>
+                </div>
+              </div>
+            </div>
+            ${imageHTML}
+            ${embedHTML}
+            ${contentHTML}
+            ${isAdmin ? `
+            <div class="announcement-actions">
+              <button class="pin-btn" onclick="togglePin('${announcement.id}')">${announcement.pinned ? '📌 Unpin' : '📌 Pin'}</button>
+              <button class="edit-btn" onclick="editAnnouncement('${announcement.id}')">✏️ Edit</button>
+              <button class="delete-btn" onclick="deleteAnnouncement('${announcement.id}')">🗑️ Delete</button>
+            </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = `<div class="announcements-container">${announcementsHTML}</div>`;
+      
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load();
+      }
+    }
+
+    async function togglePin(announcementId) {
+      const announcement = allAnnouncements.find(a => a.id === announcementId);
+      if (!announcement) return;
+
+      announcement.pinned = !announcement.pinned;
+      
+      const success = await saveAllAnnouncementsToScript();
+      if (success) {
+        filterAndDisplayAnnouncements();
+        showToast(announcement.pinned ? 'ピン留めしました' : 'ピン留めを解除しました');
+      }
+    }
+
+    window.togglePin = togglePin;
+
+    function showAddForm() {
+      showForm = true;
+      editingAnnouncementId = null;
+      
+      const formContainer = document.getElementById('formContainer');
+      formContainer.innerHTML = createFormHTML('New Post');
+      setupFormListeners();
+      document.getElementById('addAnnouncementBtn').style.display = 'none';
+    }
+
+    function createFormHTML(title, editingAnnouncement = null) {
+      const announcement = editingAnnouncement && typeof editingAnnouncement === 'object' ? editingAnnouncement : null;
+      
+      return `
+        <div class="announcement-form">
+          <h3 class="form-title">${title}</h3>
+          <form id="addAnnouncementForm">
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category">
+                <option value="">カテゴリーを選択...</option>
+                ${categories.map(cat => `<option value="${cat}" ${announcement?.category === cat ? 'selected' : ''}>${cat}</option>`).join('')}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="imageUrl">Image URL</label>
+              <input type="url" id="imageUrl" placeholder="https://..." value="${announcement?.imageUrl || ''}">
+            </div>
+            <div class="form-group">
+              <label for="embedCode">Embed Code (YouTube, Twitter, etc.)</label>
+              <textarea id="embedCode" placeholder="埋め込みコードを貼り付け (iframe, blockquote, etc.)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="content">Content</label>
+              <textarea id="content" placeholder="メッセージを入力 (URLは自動でリンクになります)">${announcement?.content || ''}</textarea>
+            </div>
+            <div class="form-buttons">
+              <button type="submit" class="submit-btn">${announcement ? 'Update' : 'Post'}</button>
+              <button type="button" class="cancel-btn" onclick="hideAddForm()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      `;
+    }
+
+    function setupFormListeners() {
+      document.getElementById('addAnnouncementForm').addEventListener('submit', handleAddAnnouncement);
+    }
+
+    function hideAddForm() {
+      showForm = false;
+      editingAnnouncementId = null;
+      document.getElementById('formContainer').innerHTML = '';
+      if (isAdmin) {
+        document.getElementById('addAnnouncementBtn').style.display = 'block';
+      }
+    }
+
+    window.hideAddForm = hideAddForm;
+
+    async function handleAddAnnouncement(e) {
+      e.preventDefault();
+
+      const content = document.getElementById('content').value.trim();
+      const imageUrl = document.getElementById('imageUrl').value.trim();
+      const embedCode = document.getElementById('embedCode').value.trim();
+      const category = document.getElementById('category').value;
+
+      if (!content && !imageUrl && !embedCode) {
+        showToast('コンテンツ、画像URL、または埋め込みコードを入力してください');
+        return;
+      }
+
+      const submitBtn = document.querySelector('.submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span>';
+
+      if (editingAnnouncementId) {
+        const announcement = allAnnouncements.find(a => a.id === editingAnnouncementId);
+        if (announcement) {
+          announcement.content = content;
+          announcement.imageUrl = imageUrl;
+          announcement.embedCode = embedCode;
+          announcement.category = category;
+          
+          const success = await saveAllAnnouncementsToScript();
+          if (success) {
+            hideAddForm();
+            filterAndDisplayAnnouncements();
+            updateCategories();
+            showToast('更新しました');
+          } else {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Update';
+          }
+        }
+      } else {
+        const newAnnouncement = {
+          id: Date.now().toString(),
+          content: content,
+          imageUrl: imageUrl,
+          embedCode: embedCode,
+          category: category,
+          timestamp: Date.now(),
+          pinned: false
+        };
+
+        allAnnouncements.push(newAnnouncement);
+        
+        const success = await saveAllAnnouncementsToScript();
+        if (success) {
+          hideAddForm();
+          filterAndDisplayAnnouncements();
+          updateCategories();
+          showToast('投稿しました');
+        } else {
+          allAnnouncements.pop();
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Post';
+        }
+      }
+    }
+
+    function editAnnouncement(announcementId) {
+      const announcement = allAnnouncements.find(a => a.id === announcementId);
+      if (!announcement) return;
+
+      editingAnnouncementId = announcementId;
+      showForm = true;
+
+      const formContainer = document.getElementById('formContainer');
+      formContainer.innerHTML = createFormHTML('Edit Post', announcement);
+      setupFormListeners();
+      document.getElementById('addAnnouncementBtn').style.display = 'none';
+      
+      formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    window.editAnnouncement = editAnnouncement;
+
+    async function deleteAnnouncement(announcementId) {
+      const index = allAnnouncements.findIndex(a => a.id === announcementId);
+      if (index === -1) return;
+
+      const deletedAnnouncement = allAnnouncements[index];
+      allAnnouncements.splice(index, 1);
+      
+      const success = await saveAllAnnouncementsToScript();
+      if (success) {
+        filterAndDisplayAnnouncements();
+        updateCategories();
+        showToast('削除しました');
+      } else {
+        // Restore on failure
+        allAnnouncements.splice(index, 0, deletedAnnouncement);
+      }
+    }
+
+    window.deleteAnnouncement = deleteAnnouncement;
+
+    document.getElementById('addAnnouncementBtn').addEventListener('click', showAddForm);
+
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'toast-popup';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+    }
+
+    initializeApp();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a683a6176e2d4b3',t:'MTc2NDQ4MzUxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
