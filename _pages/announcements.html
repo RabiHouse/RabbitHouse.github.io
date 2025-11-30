@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -676,24 +676,19 @@
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
     // ========================================
-    // CONFIGURATION (Edit here)
+    // CONFIGURATION
     // ========================================
     const CONFIG = {
       siteTitle: "Rabbitflower",
       siteDescription: "🐰💐my notice💐🐰",
       announcementsTitle: "Latest Announcements",
+      profileImageUrl: "https://pbs.twimg.com/profile_images/1992662209349226497/n3RB34ap_400x400.jpg",
+      adminPasswordHash: "e92fec58f34cd99929ba4a98ef9197bf3dde38736b903fe3f43bc36dc1e95b4e", // Set your password hash here
       
-      // PROFILE IMAGE SETUP:
-      // Paste your X (Twitter) profile image URL here
-      // Example: "https://pbs.twimg.com/profile_images/1234567890/image.jpg"
-      profileImageUrl: "https://pbs.twimg.com/profile_images/1992662209349226497/n3RB34ap_400x400.jpg", // Your X profile image URL
-      
-      // PASSWORD SETUP:
-      // 1. Click "Generate Password Hash" button above
-      // 2. Enter your desired password
-      // 3. Copy the generated hash
-      // 4. Paste it here as adminPasswordHash value
-      adminPasswordHash: "e92fec58f34cd99929ba4a98ef9197bf3dde38736b903fe3f43bc36dc1e95b4e" // Leave empty initially, then paste generated hash here
+      // Google Sheets API Configuration
+      googleSheetsApiKey: "AIzaSyBQBibwN_yzn9YMXengo-JlUWT1ROcUK-I",
+      spreadsheetId: "1U5FHp7Mhr6p292pIRS3zjQYi4siyyE5bLkahrLhfFmM",
+      sheetName: "Announcements" // Sheet tab name
     };
     // ========================================
 
@@ -702,11 +697,114 @@
     let showForm = false;
     let editingAnnouncementId = null;
     let activeCategory = 'all';
-    let isAdmin = localStorage.getItem('isAdmin') === 'true';
+    let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
     const categories = ['🎵 Music', '🎞️ Movie', '🎨 NFT', '📰 News', '✨ Goods', '🐰 Misc'];
 
-    // Simple SHA-256 hash function
+    // Google Sheets API Functions
+    async function loadAnnouncementsFromSheet() {
+      try {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}/values/${CONFIG.sheetName}?key=${CONFIG.googleSheetsApiKey}`;
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          if (response.status === 404) {
+            // Sheet doesn't exist yet, create it
+            await createSheet();
+            return [];
+          }
+          throw new Error('Failed to load data');
+        }
+        
+        const data = await response.json();
+        
+        if (!data.values || data.values.length <= 1) {
+          return [];
+        }
+        
+        // Skip header row and convert to objects
+        const announcements = data.values.slice(1).map((row, index) => ({
+          id: row[0] || `row-${index}`,
+          content: row[1] || '',
+          imageUrl: row[2] || '',
+          embedCode: row[3] || '',
+          category: row[4] || '',
+          timestamp: parseInt(row[5]) || Date.now(),
+          pinned: row[6] === 'TRUE'
+        }));
+        
+        return announcements;
+      } catch (error) {
+        console.error('Error loading announcements:', error);
+        showToast('データの読み込みに失敗しました');
+        return [];
+      }
+    }
+
+    async function createSheet() {
+      try {
+        // Initialize with headers
+        const headers = [['id', 'content', 'imageUrl', 'embedCode', 'category', 'timestamp', 'pinned']];
+        await saveToSheet(headers);
+      } catch (error) {
+        console.error('Error creating sheet:', error);
+      }
+    }
+
+    async function saveToSheet(data) {
+      try {
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}/values/${CONFIG.sheetName}?valueInputOption=RAW&key=${CONFIG.googleSheetsApiKey}`;
+        
+        const response = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            values: data
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to save data');
+        }
+        
+        return true;
+      } catch (error) {
+        console.error('Error saving to sheet:', error);
+        showToast('データの保存に失敗しました');
+        return false;
+      }
+    }
+
+    async function saveAllAnnouncements() {
+      const headers = [['id', 'content', 'imageUrl', 'embedCode', 'category', 'timestamp', 'pinned']];
+      const rows = allAnnouncements.map(a => [
+        a.id,
+        a.content,
+        a.imageUrl,
+        a.embedCode,
+        a.category,
+        a.timestamp.toString(),
+        a.pinned ? 'TRUE' : 'FALSE'
+      ]);
+      
+      return await saveToSheet([...headers, ...rows]);
+    }
+
+    async function initializeApp() {
+      document.getElementById('siteTitle').textContent = CONFIG.siteTitle;
+      document.getElementById('siteDescription').textContent = CONFIG.siteDescription;
+      document.getElementById('announcementsTitle').textContent = CONFIG.announcementsTitle;
+      
+      updateAdminUI();
+      
+      // Load data from Google Sheets
+      allAnnouncements = await loadAnnouncementsFromSheet();
+      filterAndDisplayAnnouncements();
+      updateCategories();
+    }
+
     async function hashPassword(password) {
       const encoder = new TextEncoder();
       const data = encoder.encode(password);
@@ -714,27 +812,6 @@
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       return hashHex;
-    }
-
-    function loadAnnouncements() {
-      const stored = localStorage.getItem('announcements');
-      return stored ? JSON.parse(stored) : [];
-    }
-
-    function saveAnnouncements(announcements) {
-      localStorage.setItem('announcements', JSON.stringify(announcements));
-    }
-
-    function init() {
-      allAnnouncements = loadAnnouncements();
-      
-      document.getElementById('siteTitle').textContent = CONFIG.siteTitle;
-      document.getElementById('siteDescription').textContent = CONFIG.siteDescription;
-      document.getElementById('announcementsTitle').textContent = CONFIG.announcementsTitle;
-      
-      updateAdminUI();
-      filterAndDisplayAnnouncements();
-      updateCategories();
     }
 
     function updateCategories() {
@@ -766,7 +843,7 @@
     }
 
     function filterAndDisplayAnnouncements() {
-      let filtered = allAnnouncements.sort((a, b) => {
+      let filtered = [...allAnnouncements].sort((a, b) => {
         if (a.pinned !== b.pinned) return b.pinned ? 1 : -1;
         return b.timestamp - a.timestamp;
       });
@@ -779,7 +856,6 @@
       renderAnnouncements();
     }
 
-    // Hash Generator Modal
     document.getElementById('hashGeneratorBtn').addEventListener('click', showHashGenerator);
 
     function showHashGenerator() {
@@ -789,15 +865,15 @@
         <div class="modal-content">
           <h3>🔧 Password Hash Generator</h3>
           <div class="info-text">
-            <strong>Instructions:</strong><br>
-            1. Enter your desired password below<br>
-            2. Click "Generate Hash"<br>
-            3. Copy the generated hash<br>
-            4. Paste it in CONFIG.adminPasswordHash in the code
+            <strong>手順:</strong><br>
+            1. 下にパスワードを入力<br>
+            2. 「Generate Hash」をクリック<br>
+            3. 生成されたハッシュをコピー<br>
+            4. CONFIG.adminPasswordHashに貼り付け
           </div>
-          <input type="password" id="passwordToHash" placeholder="Enter your password">
-          <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2d2d2d;">Generated Hash:</label>
-          <textarea id="generatedHash" readonly placeholder="Hash will appear here..."></textarea>
+          <input type="password" id="passwordToHash" placeholder="パスワードを入力">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2d2d2d;">生成されたハッシュ:</label>
+          <textarea id="generatedHash" readonly placeholder="ここにハッシュが表示されます..."></textarea>
           <div class="modal-buttons">
             <button class="primary-btn" onclick="generateHash()">Generate Hash</button>
             <button class="copy-btn" onclick="copyHash()" id="copyHashBtn" style="display: none;">Copy Hash</button>
@@ -814,40 +890,39 @@
     async function generateHash() {
       const password = document.getElementById('passwordToHash').value;
       if (!password) {
-        showToast('Please enter a password');
+        showToast('パスワードを入力してください');
         return;
       }
       
       const hash = await hashPassword(password);
       document.getElementById('generatedHash').value = hash;
       document.getElementById('copyHashBtn').style.display = 'block';
-      showToast('Hash generated successfully!');
+      showToast('ハッシュを生成しました！');
     }
 
     function copyHash() {
       const hashText = document.getElementById('generatedHash').value;
       if (!hashText) {
-        showToast('No hash to copy');
+        showToast('コピーするハッシュがありません');
         return;
       }
       
       navigator.clipboard.writeText(hashText).then(() => {
-        showToast('Hash copied to clipboard!');
+        showToast('クリップボードにコピーしました！');
       });
     }
 
     window.generateHash = generateHash;
     window.copyHash = copyHash;
 
-    // Admin Login Modal
     document.getElementById('adminLoginBtn').addEventListener('click', showAdminLoginModal);
     document.getElementById('adminLogoutBtn').addEventListener('click', logoutAdmin);
 
     function showAdminLoginModal() {
       if (!CONFIG.adminPasswordHash) {
         showModal({
-          title: '⚠️ Password Not Set',
-          message: 'Please generate a password hash first using the "Generate Password Hash" button, then set it in CONFIG.adminPasswordHash.',
+          title: '⚠️ パスワードが設定されていません',
+          message: '先に「Generate Password Hash」ボタンでハッシュを生成し、CONFIG.adminPasswordHashに設定してください。',
           buttons: [{text: 'OK', primary: true}]
         });
         return;
@@ -858,7 +933,7 @@
       modal.innerHTML = `
         <div class="modal-content">
           <h3>🔑 Admin Login</h3>
-          <input type="password" id="passwordInput" placeholder="Enter password">
+          <input type="password" id="passwordInput" placeholder="パスワードを入力">
           <div class="modal-buttons">
             <button class="primary-btn" onclick="verifyAdminPassword()">Login</button>
             <button class="secondary-btn" onclick="closeModal(this)">Cancel</button>
@@ -877,12 +952,12 @@
       
       if (inputHash === CONFIG.adminPasswordHash) {
         isAdmin = true;
-        localStorage.setItem('isAdmin', 'true');
+        sessionStorage.setItem('isAdmin', 'true');
         document.querySelector('.modal-overlay').remove();
         updateAdminUI();
-        showToast('Logged in successfully');
+        showToast('ログインしました');
       } else {
-        showToast('Incorrect password');
+        showToast('パスワードが正しくありません');
       }
     }
 
@@ -890,10 +965,10 @@
 
     function logoutAdmin() {
       isAdmin = false;
-      localStorage.removeItem('isAdmin');
+      sessionStorage.removeItem('isAdmin');
       updateAdminUI();
       hideAddForm();
-      showToast('Logged out');
+      showToast('ログアウトしました');
     }
 
     function updateAdminUI() {
@@ -946,7 +1021,7 @@
         container.innerHTML = `
           <div class="empty-state">
             <div class="empty-icon">📭</div>
-            <p class="empty-text">No announcements yet</p>
+            <p class="empty-text">まだお知らせがありません</p>
           </div>
         `;
         return;
@@ -991,19 +1066,22 @@
 
       container.innerHTML = `<div class="announcements-container">${announcementsHTML}</div>`;
       
-      // Re-load Twitter widgets after content is rendered
       if (window.twttr && window.twttr.widgets) {
         window.twttr.widgets.load();
       }
     }
 
-    function togglePin(announcementId) {
+    async function togglePin(announcementId) {
       const announcement = allAnnouncements.find(a => a.id === announcementId);
       if (!announcement) return;
 
       announcement.pinned = !announcement.pinned;
-      saveAnnouncements(allAnnouncements);
-      filterAndDisplayAnnouncements();
+      
+      const success = await saveAllAnnouncements();
+      if (success) {
+        filterAndDisplayAnnouncements();
+        showToast(announcement.pinned ? 'ピン留めしました' : 'ピン留めを解除しました');
+      }
     }
 
     window.togglePin = togglePin;
@@ -1028,7 +1106,7 @@
             <div class="form-group">
               <label for="category">Category</label>
               <select id="category">
-                <option value="">Select category...</option>
+                <option value="">カテゴリーを選択...</option>
                 ${categories.map(cat => `<option value="${cat}" ${announcement?.category === cat ? 'selected' : ''}>${cat}</option>`).join('')}
               </select>
             </div>
@@ -1038,11 +1116,11 @@
             </div>
             <div class="form-group">
               <label for="embedCode">Embed Code (YouTube, Twitter, etc.)</label>
-              <textarea id="embedCode" placeholder="Paste embed code here (iframe, blockquote, etc.)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
+              <textarea id="embedCode" placeholder="埋め込みコードを貼り付け (iframe, blockquote, etc.)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
             </div>
             <div class="form-group">
               <label for="content">Content</label>
-              <textarea id="content" placeholder="Enter your message (URLs will be automatically linked)">${announcement?.content || ''}</textarea>
+              <textarea id="content" placeholder="メッセージを入力 (URLは自動でリンクになります)">${announcement?.content || ''}</textarea>
             </div>
             <div class="form-buttons">
               <button type="submit" class="submit-btn">${announcement ? 'Update' : 'Post'}</button>
@@ -1068,7 +1146,7 @@
 
     window.hideAddForm = hideAddForm;
 
-    function handleAddAnnouncement(e) {
+    async function handleAddAnnouncement(e) {
       e.preventDefault();
 
       const content = document.getElementById('content').value.trim();
@@ -1077,9 +1155,13 @@
       const category = document.getElementById('category').value;
 
       if (!content && !imageUrl && !embedCode) {
-        showToast('Please enter content, image URL, or embed code');
+        showToast('コンテンツ、画像URL、または埋め込みコードを入力してください');
         return;
       }
+
+      const submitBtn = document.querySelector('.submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span>';
 
       if (editingAnnouncementId) {
         const announcement = allAnnouncements.find(a => a.id === editingAnnouncementId);
@@ -1088,11 +1170,17 @@
           announcement.imageUrl = imageUrl;
           announcement.embedCode = embedCode;
           announcement.category = category;
-          saveAnnouncements(allAnnouncements);
-          hideAddForm();
-          filterAndDisplayAnnouncements();
-          updateCategories();
-          showToast('Updated successfully');
+          
+          const success = await saveAllAnnouncements();
+          if (success) {
+            hideAddForm();
+            filterAndDisplayAnnouncements();
+            updateCategories();
+            showToast('更新しました');
+          } else {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Update';
+          }
         }
       } else {
         const newAnnouncement = {
@@ -1106,11 +1194,18 @@
         };
 
         allAnnouncements.push(newAnnouncement);
-        saveAnnouncements(allAnnouncements);
-        hideAddForm();
-        filterAndDisplayAnnouncements();
-        updateCategories();
-        showToast('Posted successfully');
+        
+        const success = await saveAllAnnouncements();
+        if (success) {
+          hideAddForm();
+          filterAndDisplayAnnouncements();
+          updateCategories();
+          showToast('投稿しました');
+        } else {
+          allAnnouncements.pop();
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Post';
+        }
       }
     }
 
@@ -1131,12 +1226,21 @@
 
     window.editAnnouncement = editAnnouncement;
 
-    function deleteAnnouncement(announcementId) {
-      allAnnouncements = allAnnouncements.filter(a => a.id !== announcementId);
-      saveAnnouncements(allAnnouncements);
-      filterAndDisplayAnnouncements();
-      updateCategories();
-      showToast('Deleted successfully');
+    async function deleteAnnouncement(announcementId) {
+      const index = allAnnouncements.findIndex(a => a.id === announcementId);
+      if (index === -1) return;
+
+      allAnnouncements.splice(index, 1);
+      
+      const success = await saveAllAnnouncements();
+      if (success) {
+        filterAndDisplayAnnouncements();
+        updateCategories();
+        showToast('削除しました');
+      } else {
+        // Restore on failure
+        allAnnouncements.splice(index, 0, announcement);
+      }
     }
 
     window.deleteAnnouncement = deleteAnnouncement;
@@ -1151,7 +1255,7 @@
       setTimeout(() => toast.remove(), 2000);
     }
 
-    init();
+    initializeApp();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a67987152d09ce5',t:'MTc2NDQ3Njg3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a681d2e70f52635',t:'MTc2NDQ4MjMxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
