@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Site Announcements</title>
+  <title>My Notes</title>
   <style>
     body {
       box-sizing: border-box;
@@ -52,7 +52,16 @@
       font-size: 1.1rem;
       color: #666;
       line-height: 1.6;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .loading-notice {
+      font-size: 0.9rem;
+      color: #ffb6d9;
+      line-height: 1.5;
       margin: 0 0 1rem 0;
+      font-weight: 500;
+      text-align: center;
     }
 
     .top-link {
@@ -404,9 +413,26 @@
     }
 
     .embed-container {
+      margin: 1.5rem 0;
+      max-width: 100%;
+      overflow: hidden;
       display: flex;
       justify-content: center;
-      margin: 1.5rem 0;
+      align-items: center;
+    }
+
+    .embed-container iframe {
+      max-width: 100%;
+      display: block;
+    }
+
+    .embed-container blockquote {
+      margin: 0 auto;
+    }
+
+    .embed-container > * {
+      width: 100%;
+      max-width: 500px;
     }
 
     .announcement-actions {
@@ -450,6 +476,31 @@
     .pin-btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
+    }
+
+    .load-more-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .load-more-btn {
+      background: #ffb6d9;
+      color: #ffffff;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+    }
+
+    .load-more-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 105, 180, 0.3);
+      background: #ffa6c1;
     }
 
     .modal-overlay {
@@ -608,7 +659,51 @@
       to { transform: rotate(360deg); }
     }
 
+    .scroll-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #ffb6d9 0%, #ffa6c1 100%);
+      border: none;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 105, 180, 0.4);
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-to-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 24px rgba(255, 105, 180, 0.5);
+      background: linear-gradient(135deg, #ffa6c1 0%, #ff96b1 100%);
+    }
+
+    .scroll-to-top:active {
+      transform: translateY(-2px);
+    }
+
     @media (max-width: 640px) {
+      .scroll-to-top {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
+      }
       .site-wrapper {
         padding: 1.5rem 1rem;
       }
@@ -657,7 +752,9 @@
      🐰
     </div>
     <h1 class="site-title" id="siteTitle">Rabbitflower</h1>
-    <p class="site-description" id="siteDescription">🐰💐my notice💐🐰</p><a href="https://timothy.rabbitflowerdiary.com/" class="top-link" target="_blank" rel="noopener noreferrer">TOP</a>
+    <p class="site-description" id="siteDescription">🐰💐my notice💐🐰</p>
+    <p class="loading-notice">読み込みに少し時間がかかります🌸<br>
+     Loading may take a moment✨</p><a href="https://timothy.rabbitflowerdiary.com/" class="top-link" target="_blank" rel="noopener noreferrer">TOP</a>
     <div class="admin-controls"><button class="admin-login-btn" id="adminLoginBtn" style="display: block;">🔑 Admin Login</button> <button class="hash-generator-btn" id="hashGeneratorBtn">🔧 Generate Password Hash</button> <button class="admin-logout-btn" id="adminLogoutBtn" style="display: none;">🚪 Logout</button>
     </div>
    </div>
@@ -671,8 +768,10 @@
     </div>
     <div id="formContainer"></div>
     <div id="announcementsContainer"></div>
+    <div class="load-more-container" id="loadMoreContainer" style="display: none;"><button class="load-more-btn" id="loadMoreBtn">もっと見る 📜</button>
+    </div>
    </div>
-  </div>
+  </div><button class="scroll-to-top" id="scrollToTopBtn" aria-label="トップに戻る">🐰</button>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
     // ========================================
@@ -692,12 +791,37 @@
 
     let allAnnouncements = [];
     let currentAnnouncements = [];
+    let displayedCount = 8;
     let showForm = false;
     let editingAnnouncementId = null;
     let activeCategory = 'all';
     let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
     const categories = ['🎵 Music', '🎞️ Movie', '🎨 NFT', '📰 News', '🛍️ Goods', '🐰 Misc'];
+    const INITIAL_ITEMS = 8;
+    const ITEMS_PER_PAGE = 5;
+
+    // Compression helpers
+    function compressData(data) {
+      try {
+        const jsonString = JSON.stringify(data);
+        const compressed = btoa(encodeURIComponent(jsonString));
+        return compressed;
+      } catch (error) {
+        console.error('Compression error:', error);
+        return JSON.stringify(data);
+      }
+    }
+
+    function decompressData(compressed) {
+      try {
+        const jsonString = decodeURIComponent(atob(compressed));
+        return JSON.parse(jsonString);
+      } catch (error) {
+        console.error('Decompression error:', error);
+        return JSON.parse(compressed);
+      }
+    }
 
     // Google Apps Script API Functions
     async function loadAnnouncementsFromScript() {
@@ -817,6 +941,7 @@
 
     function filterByCategory(category) {
       activeCategory = category;
+      displayedCount = INITIAL_ITEMS;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.category === category);
       });
@@ -837,6 +962,45 @@
       renderAnnouncements();
     }
 
+    function loadMoreAnnouncements() {
+      // 現在のスクロール位置とコンテナの高さを保存
+      const currentScrollPos = window.scrollY;
+      const container = document.getElementById('announcementsContainer');
+      const containerHeightBefore = container.scrollHeight;
+      
+      displayedCount += ITEMS_PER_PAGE;
+      renderAnnouncements();
+      
+      // レンダリング後、スクロール位置を調整
+      requestAnimationFrame(() => {
+        const containerHeightAfter = container.scrollHeight;
+        const heightDifference = containerHeightAfter - containerHeightBefore;
+        
+        // 追加されたコンテンツの分だけスクロール位置を調整
+        window.scrollTo({ 
+          top: currentScrollPos, 
+          behavior: 'instant' 
+        });
+      });
+    }
+
+    document.getElementById('loadMoreBtn').addEventListener('click', loadMoreAnnouncements);
+
+    // Scroll to top button functionality
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    });
+    
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     document.getElementById('hashGeneratorBtn').addEventListener('click', showHashGenerator);
 
     function showHashGenerator() {
@@ -849,7 +1013,7 @@
             <strong>手順:</strong><br>
             1. 下にパスワードを入力<br>
             2. 「Generate Hash」をクリック<br>
-            3. 生成されたハッシュをコピー<br>
+            3.       されたハッシュをコピー<br>
             4. CONFIG.adminPasswordHashに貼り付け
           </div>
           <input type="password" id="passwordToHash" placeholder="パスワードを入力">
@@ -889,7 +1053,7 @@
       }
       
       navigator.clipboard.writeText(hashText).then(() => {
-        showToast('クリップボードにコピーしました！');
+        showToast('クリップボ   ドにコピーしました！');
       });
     }
 
@@ -996,7 +1160,7 @@
     }
 
     function convertSpotifyUrl(url) {
-      // Spotify URL patterns
+      // Spotify URL patterns (with optional query parameters)
       const trackPattern = /https:\/\/open\.spotify\.com\/track\/([a-zA-Z0-9]+)/;
       const albumPattern = /https:\/\/open\.spotify\.com\/album\/([a-zA-Z0-9]+)/;
       const playlistPattern = /https:\/\/open\.spotify\.com\/playlist\/([a-zA-Z0-9]+)/;
@@ -1025,6 +1189,7 @@
 
     function renderAnnouncements() {
       const container = document.getElementById('announcementsContainer');
+      const loadMoreContainer = document.getElementById('loadMoreContainer');
       
       if (currentAnnouncements.length === 0) {
         container.innerHTML = `
@@ -1033,26 +1198,31 @@
             <p class="empty-text">まだお知らせがありません</p>
           </div>
         `;
+        loadMoreContainer.style.display = 'none';
         return;
       }
 
+      const itemsToShow = currentAnnouncements.slice(0, displayedCount);
+      const hasMore = currentAnnouncements.length > displayedCount;
+
       const profileImage = CONFIG.profileImageUrl;
       
-      const announcementsHTML = currentAnnouncements.map(announcement => {
+      const announcementsHTML = itemsToShow.map(announcement => {
         const avatarHTML = profileImage 
           ? `<div class="announcement-avatar"><img src="${profileImage}" alt="Profile" onerror="this.style.display='none'; this.parentElement.innerHTML='📢';"></div>`
           : `<div class="announcement-avatar">📢</div>`;
         
-        const imageHTML = announcement.imageUrl ? `<div style="margin: 1rem 0;"><img src="${announcement.imageUrl}" alt="Post image" style="max-width: 100%; border-radius: 12px; display: block;" onerror="this.style.display='none';"></div>` : '';
+        const imageHTML = announcement.imageUrl ? `<div style="margin: 1.5rem 0; display: flex; justify-content: center;"><img data-src="${announcement.imageUrl}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3C/svg%3E" alt="Post image" style="max-width: 100%; border-radius: 12px; display: block; background: #f0f0f0;" onerror="this.style.display='none';" loading="lazy"></div>` : '';
         
         // Check if embed code is a Spotify URL and convert it
         let embedHTML = '';
         if (announcement.embedCode) {
-          const spotifyEmbed = convertSpotifyUrl(announcement.embedCode.trim());
+          const trimmedEmbed = announcement.embedCode.trim();
+          const spotifyEmbed = convertSpotifyUrl(trimmedEmbed);
           if (spotifyEmbed) {
             embedHTML = `<div class="embed-container">${spotifyEmbed}</div>`;
           } else {
-            embedHTML = `<div class="embed-container">${announcement.embedCode}</div>`;
+            embedHTML = `<div class="embed-container">${trimmedEmbed}</div>`;
           }
         }
         
@@ -1077,7 +1247,7 @@
             <div class="announcement-actions">
               <button class="pin-btn" onclick="togglePin('${announcement.id}')">${announcement.pinned ? '📌 Unpin' : '📌 Pin'}</button>
               <button class="edit-btn" onclick="editAnnouncement('${announcement.id}')">✏️ Edit</button>
-              <button class="delete-btn" onclick="deleteAnnouncement('${announcement.id}')">🗑️ Delete</button>
+              <button class="delete-btn" onclick="deleteAnnouncement('${announcement.id}')">  ️ Delete</button>
             </div>
             ` : ''}
           </div>
@@ -1086,9 +1256,32 @@
 
       container.innerHTML = `<div class="announcements-container">${announcementsHTML}</div>`;
       
+      loadMoreContainer.style.display = hasMore ? 'flex' : 'none';
+      
+      // Twitter widgets reload
       if (window.twttr && window.twttr.widgets) {
         window.twttr.widgets.load();
       }
+      
+      // Intersection Observer for lazy loading images
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              observer.unobserve(img);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px'
+      });
+      
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
     }
 
     async function togglePin(announcementId) {
@@ -1100,7 +1293,7 @@
       const success = await saveAllAnnouncementsToScript();
       if (success) {
         filterAndDisplayAnnouncements();
-        showToast(announcement.pinned ? 'ピン留めしました' : 'ピン留めを解除しました');
+        showToast(announcement.pinned ? 'ピン留めし   した' : 'ピン留めを解除しました');
       }
     }
 
@@ -1136,11 +1329,11 @@
             </div>
             <div class="form-group">
               <label for="embedCode">Embed Code / Spotify URL</label>
-              <textarea id="embedCode" placeholder="埋め込みコード (iframe, blockquote, etc.) またはSpotify URL (https://open.spotify.com/...)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
+              <textarea id="embedCode" placeholder="埋め込みコ  ド (iframe, blockquote, etc.) またはSpotify URL (https://open.spotify.com/...)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
             </div>
             <div class="form-group">
               <label for="content">Content</label>
-              <textarea id="content" placeholder="メッセージを入力 (URLは自動でリンクになります)">${announcement?.content || ''}</textarea>
+              <textarea id="content" placeholder="メッセージを入力 (URLは自動で  ンクになります)">${announcement?.content || ''}</textarea>
             </div>
             <div class="form-buttons">
               <button type="submit" class="submit-btn">${announcement ? 'Update' : 'Post'}</button>
@@ -1175,7 +1368,7 @@
       const category = document.getElementById('category').value;
 
       if (!content && !imageUrl && !embedCode) {
-        showToast('コンテンツ、画像URL、または埋め込みコードを入力してください');
+        showToast('コンテンツ、画像URL、または埋め込みコードを入力してくだ   い');
         return;
       }
 
@@ -1278,5 +1471,5 @@
 
     initializeApp();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6ec14f40a8eb86',t:'MTc2NDU1MTk1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6f27f671ba2635',t:'MTc2NDU1NjE1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
