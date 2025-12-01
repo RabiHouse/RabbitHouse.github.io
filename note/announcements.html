@@ -282,6 +282,18 @@
       line-height: 1.6;
     }
 
+    .char-counter {
+      font-size: 0.85rem;
+      color: #999;
+      text-align: right;
+      margin-top: 0.25rem;
+    }
+
+    .char-counter.warning {
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+
     .form-buttons {
       display: flex;
       gap: 1rem;
@@ -426,6 +438,25 @@
       margin: 1.5rem 0;
       white-space: pre-wrap;
       word-wrap: break-word;
+    }
+
+    .expand-btn {
+      background: transparent;
+      border: 2px solid #ffb6d9;
+      color: #ffb6d9;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0.75rem;
+      display: inline-block;
+    }
+
+    .expand-btn:hover {
+      background: #ffb6d9;
+      color: #ffffff;
     }
 
     .embed-container {
@@ -857,9 +888,11 @@
       siteTitle: "Rabbitflower",
       siteDescription: "🐰💐my notice💐🐰",
       announcementsTitle: "Latest Announcements",
-      profileImageUrl: "https://pbs.twimg.com/profile_images/1862497/n3RB34ap_400x400.jpg",
+      profileImageUrl: "https://pbs.twimg.com/profile_images/1992662209349226497/n3RB34ap_400x400.jpg",
       adminPasswordHash: "e92fec58f34cd99929ba4a98ef9197bf3dde38736b903fe3f43bc36dc1e95b4e",
       siteUrl: window.location.href,
+      maxCharacters: 3000,
+      previewCharacters: 300,
       
       scriptUrl: "https://script.google.com/macros/s/AKfycbz9bvPcqQQ-4y_G6ZQLRBY1rNgjismDQwAVM8omtNuZiANcYYdW4molVASj2FzFITa3/exec"
     };
@@ -1255,6 +1288,24 @@
       return null;
     }
 
+    function toggleExpand(announcementId) {
+      const card = document.querySelector(`[data-id="${announcementId}"]`);
+      const contentDiv = card.querySelector('.announcement-content');
+      const expandBtn = card.querySelector('.expand-btn');
+      
+      if (contentDiv.dataset.expanded === 'true') {
+        contentDiv.innerHTML = linkifyText(contentDiv.dataset.truncated);
+        contentDiv.dataset.expanded = 'false';
+        expandBtn.textContent = '続きを読む 📖';
+      } else {
+        contentDiv.innerHTML = linkifyText(contentDiv.dataset.full);
+        contentDiv.dataset.expanded = 'true';
+        expandBtn.textContent = '折りたたむ 📕';
+      }
+    }
+
+    window.toggleExpand = toggleExpand;
+
     function shareToX(announcementId) {
       const announcement = allAnnouncements.find(a => a.id === announcementId);
       if (!announcement) return;
@@ -1344,7 +1395,23 @@
           }
         }
         
-        const contentHTML = announcement.content ? `<div class="announcement-content">${linkifyText(announcement.content)}</div>` : '';
+        let contentHTML = '';
+        if (announcement.content) {
+          const text = announcement.content;
+          const needsTruncate = text.length > CONFIG.previewCharacters;
+          
+          if (needsTruncate) {
+            const truncated = text.substring(0, CONFIG.previewCharacters);
+            contentHTML = `
+              <div class="announcement-content" data-truncated="${truncated}" data-full="${text}" data-expanded="false">
+                ${linkifyText(truncated)}
+              </div>
+              <button class="expand-btn" onclick="toggleExpand('${announcement.id}')">続きを読む 📖</button>
+            `;
+          } else {
+            contentHTML = `<div class="announcement-content">${linkifyText(text)}</div>`;
+          }
+        }
         
         return `
           <div class="announcement-card ${announcement.pinned ? 'pinned' : ''}" data-id="${announcement.id}">
@@ -1486,8 +1553,9 @@
               <textarea id="embedCode" placeholder="埋め込みコード (iframe, blockquote, etc.) またはSpotify URL (https://open.spotify.com/...)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
             </div>
             <div class="form-group">
-              <label for="content">Content</label>
-              <textarea id="content" placeholder="メッセージを入力 (URLは自動でリンクになります)">${announcement?.content || ''}</textarea>
+              <label for="content">Content (最大${CONFIG.maxCharacters}文字)</label>
+              <textarea id="content" placeholder="メッセージを入力 (URLは自動でリンクになります)" maxlength="${CONFIG.maxCharacters}">${announcement?.content || ''}</textarea>
+              <div class="char-counter" id="charCounter">0 / ${CONFIG.maxCharacters}文字</div>
             </div>
             <div class="form-buttons">
               <button type="submit" class="submit-btn">${announcement ? 'Update' : 'Post'}</button>
@@ -1500,6 +1568,23 @@
 
     function setupFormListeners() {
       document.getElementById('addAnnouncementForm').addEventListener('submit', handleAddAnnouncement);
+      
+      const contentTextarea = document.getElementById('content');
+      const charCounter = document.getElementById('charCounter');
+      
+      function updateCharCounter() {
+        const currentLength = contentTextarea.value.length;
+        charCounter.textContent = `${currentLength} / ${CONFIG.maxCharacters}文字`;
+        
+        if (currentLength >= CONFIG.maxCharacters * 0.9) {
+          charCounter.classList.add('warning');
+        } else {
+          charCounter.classList.remove('warning');
+        }
+      }
+      
+      contentTextarea.addEventListener('input', updateCharCounter);
+      updateCharCounter();
     }
 
     function hideAddForm() {
@@ -1523,6 +1608,11 @@
 
       if (!content && !imageUrl && !embedCode) {
         showToast('コンテンツ、画像URL、または埋め込みコードを入力してください');
+        return;
+      }
+
+      if (content.length > CONFIG.maxCharacters) {
+        showToast(`文字数は${CONFIG.maxCharacters}文字以内にしてください`);
         return;
       }
 
@@ -1624,5 +1714,5 @@
 
     initializeApp();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6f8450d746b200',t:'MTc2NDU1OTk0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6fc99eb5026d5f',t:'MTc2NDU2Mjc4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
