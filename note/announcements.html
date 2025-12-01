@@ -3,7 +3,16 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Notes</title>
+  <title>My Note</title><!-- OGP Tags for X (Twitter) Card -->
+  <meta property="og:title" content="Rabbitflower 🐰💐">
+  <meta property="og:description" content="my notice 💐🐰 読み込みに少し時間がかかります">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rabbitflower 🐰💐">
+  <meta name="twitter:description" content="my notice 💐🐰">
+  <meta name="twitter:image" content="">
   <style>
     body {
       box-sizing: border-box;
@@ -341,6 +350,13 @@
       box-shadow: 0 12px 30px rgba(255, 105, 180, 0.2);
     }
 
+    .announcement-card img {
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-touch-callout: none;
+      pointer-events: none;
+    }
+
     .pin-badge {
       position: absolute;
       top: 1.5rem;
@@ -435,12 +451,73 @@
       max-width: 500px;
     }
 
+    .share-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+
+    .share-btn {
+      color: #ffffff;
+      border: none;
+      padding: 0;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px) scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .share-btn.x-btn {
+      background: #000000;
+    }
+
+    .share-btn.x-btn:hover {
+      background: #333333;
+    }
+
+    .share-btn.facebook-btn {
+      background: #1877F2;
+    }
+
+    .share-btn.facebook-btn:hover {
+      background: #145dbf;
+    }
+
+    .share-btn.line-btn {
+      background: #06C755;
+    }
+
+    .share-btn.line-btn:hover {
+      background: #05a946;
+    }
+
+    .share-btn.bluesky-btn {
+      background: #1285FE;
+    }
+
+    .share-btn.bluesky-btn:hover {
+      background: #0d6ad6;
+    }
+
     .announcement-actions {
       display: flex;
       gap: 0.75rem;
       margin-top: 1.5rem;
       padding-top: 1.5rem;
       border-top: 2px solid #f0e6f6;
+      flex-wrap: wrap;
     }
 
     .edit-btn, .delete-btn, .pin-btn {
@@ -753,8 +830,7 @@
     </div>
     <h1 class="site-title" id="siteTitle">Rabbitflower</h1>
     <p class="site-description" id="siteDescription">🐰💐my notice💐🐰</p>
-    <p class="loading-notice">読み込みに少し時間がかかります🌸<br>
-     Loading may take a moment✨</p><a href="https://timothy.rabbitflowerdiary.com/" class="top-link" target="_blank" rel="noopener noreferrer">TOP</a>
+    <p class="loading-notice">Loading may take a moment🌸</p><a href="https://timothy.rabbitflowerdiary.com/" class="top-link" target="_blank" rel="noopener noreferrer">TOP</a>
     <div class="admin-controls"><button class="admin-login-btn" id="adminLoginBtn" style="display: block;">🔑 Admin Login</button> <button class="hash-generator-btn" id="hashGeneratorBtn">🔧 Generate Password Hash</button> <button class="admin-logout-btn" id="adminLogoutBtn" style="display: none;">🚪 Logout</button>
     </div>
    </div>
@@ -781,10 +857,10 @@
       siteTitle: "Rabbitflower",
       siteDescription: "🐰💐my notice💐🐰",
       announcementsTitle: "Latest Announcements",
-      profileImageUrl: "https://pbs.twimg.com/profile_images/1992662209349226497/n3RB34ap_400x400.jpg",
-      adminPasswordHash: "e92fec58f34cd99929ba4a98ef9197bf3dde38736b903fe3f43bc36dc1e95b4e", // Set your password hash here
+      profileImageUrl: "https://pbs.twimg.com/profile_images/1862497/n3RB34ap_400x400.jpg",
+      adminPasswordHash: "e92fec58f34cd99929ba4a98ef9197bf3dde38736b903fe3f43bc36dc1e95b4e",
+      siteUrl: window.location.href,
       
-      // Google Apps Script URL
       scriptUrl: "https://script.google.com/macros/s/AKfycbz9bvPcqQQ-4y_G6ZQLRBY1rNgjismDQwAVM8omtNuZiANcYYdW4molVASj2FzFITa3/exec"
     };
     // ========================================
@@ -801,7 +877,6 @@
     const INITIAL_ITEMS = 8;
     const ITEMS_PER_PAGE = 5;
 
-    // Compression helpers
     function compressData(data) {
       try {
         const jsonString = JSON.stringify(data);
@@ -823,7 +898,6 @@
       }
     }
 
-    // Google Apps Script API Functions
     async function loadAnnouncementsFromScript() {
       try {
         console.log('Loading from:', CONFIG.scriptUrl);
@@ -904,7 +978,6 @@
       
       updateAdminUI();
       
-      // Load data from Google Apps Script
       allAnnouncements = await loadAnnouncementsFromScript();
       filterAndDisplayAnnouncements();
       updateCategories();
@@ -963,7 +1036,6 @@
     }
 
     function loadMoreAnnouncements() {
-      // 現在のスクロール位置とコンテナの高さを保存
       const currentScrollPos = window.scrollY;
       const container = document.getElementById('announcementsContainer');
       const containerHeightBefore = container.scrollHeight;
@@ -971,12 +1043,10 @@
       displayedCount += ITEMS_PER_PAGE;
       renderAnnouncements();
       
-      // レンダリング後、スクロール位置を調整
       requestAnimationFrame(() => {
         const containerHeightAfter = container.scrollHeight;
         const heightDifference = containerHeightAfter - containerHeightBefore;
         
-        // 追加されたコンテンツの分だけスクロール位置を調整
         window.scrollTo({ 
           top: currentScrollPos, 
           behavior: 'instant' 
@@ -986,7 +1056,6 @@
 
     document.getElementById('loadMoreBtn').addEventListener('click', loadMoreAnnouncements);
 
-    // Scroll to top button functionality
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     
     window.addEventListener('scroll', () => {
@@ -1013,7 +1082,7 @@
             <strong>手順:</strong><br>
             1. 下にパスワードを入力<br>
             2. 「Generate Hash」をクリック<br>
-            3.       されたハッシュをコピー<br>
+            3. 生成されたハッシュをコピー<br>
             4. CONFIG.adminPasswordHashに貼り付け
           </div>
           <input type="password" id="passwordToHash" placeholder="パスワードを入力">
@@ -1053,7 +1122,7 @@
       }
       
       navigator.clipboard.writeText(hashText).then(() => {
-        showToast('クリップボ   ドにコピーしました！');
+        showToast('クリップボードにコピーしました！');
       });
     }
 
@@ -1160,7 +1229,6 @@
     }
 
     function convertSpotifyUrl(url) {
-      // Spotify URL patterns (with optional query parameters)
       const trackPattern = /https:\/\/open\.spotify\.com\/track\/([a-zA-Z0-9]+)/;
       const albumPattern = /https:\/\/open\.spotify\.com\/album\/([a-zA-Z0-9]+)/;
       const playlistPattern = /https:\/\/open\.spotify\.com\/playlist\/([a-zA-Z0-9]+)/;
@@ -1187,6 +1255,57 @@
       return null;
     }
 
+    function shareToX(announcementId) {
+      const announcement = allAnnouncements.find(a => a.id === announcementId);
+      if (!announcement) return;
+      
+      const shareText = announcement.content 
+        ? announcement.content.substring(0, 200) + (announcement.content.length > 200 ? '...' : '')
+        : 'Rabbitflower 🐰💐の新しいお知らせをチェック！';
+      
+      const shareUrl = CONFIG.siteUrl;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+      
+      window.open(twitterUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareToFacebook(announcementId) {
+      const shareUrl = CONFIG.siteUrl;
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+      window.open(facebookUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareToLine(announcementId) {
+      const announcement = allAnnouncements.find(a => a.id === announcementId);
+      if (!announcement) return;
+      
+      const shareText = announcement.content 
+        ? announcement.content.substring(0, 200) + (announcement.content.length > 200 ? '...' : '')
+        : 'Rabbitflower 🐰💐の新しいお知らせをチェック！';
+      
+      const shareUrl = CONFIG.siteUrl;
+      const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+      window.open(lineUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareToBluesky(announcementId) {
+      const announcement = allAnnouncements.find(a => a.id === announcementId);
+      if (!announcement) return;
+      
+      const shareText = announcement.content 
+        ? announcement.content.substring(0, 250) + (announcement.content.length > 250 ? '...' : '')
+        : 'Rabbitflower 🐰💐の新しいお知らせをチェック！';
+      
+      const shareUrl = CONFIG.siteUrl;
+      const blueskyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+      window.open(blueskyUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    window.shareToX = shareToX;
+    window.shareToFacebook = shareToFacebook;
+    window.shareToLine = shareToLine;
+    window.shareToBluesky = shareToBluesky;
+
     function renderAnnouncements() {
       const container = document.getElementById('announcementsContainer');
       const loadMoreContainer = document.getElementById('loadMoreContainer');
@@ -1212,9 +1331,8 @@
           ? `<div class="announcement-avatar"><img src="${profileImage}" alt="Profile" onerror="this.style.display='none'; this.parentElement.innerHTML='📢';"></div>`
           : `<div class="announcement-avatar">📢</div>`;
         
-        const imageHTML = announcement.imageUrl ? `<div style="margin: 1.5rem 0; display: flex; justify-content: center;"><img data-src="${announcement.imageUrl}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3C/svg%3E" alt="Post image" style="max-width: 100%; border-radius: 12px; display: block; background: #f0f0f0;" onerror="this.style.display='none';" loading="lazy"></div>` : '';
+        const imageHTML = announcement.imageUrl ? `<div style="margin: 1.5rem 0; display: flex; justify-content: center;"><img data-src="${announcement.imageUrl}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23f0f0f0' width='400' height='300'/%3E%3C/svg%3E" alt="Post image" style="max-width: 100%; border-radius: 12px; display: block; background: #f0f0f0;" onerror="this.style.display='none';" loading="lazy" oncontextmenu="return false;"></div>` : '';
         
-        // Check if embed code is a Spotify URL and convert it
         let embedHTML = '';
         if (announcement.embedCode) {
           const trimmedEmbed = announcement.embedCode.trim();
@@ -1243,11 +1361,33 @@
             ${imageHTML}
             ${embedHTML}
             ${contentHTML}
+            <div class="share-actions">
+              <a href="#" class="share-btn x-btn" onclick="shareToX('${announcement.id}'); return false;" title="Xで共有">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="#" class="share-btn facebook-btn" onclick="shareToFacebook('${announcement.id}'); return false;" title="Facebookで共有">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="#" class="share-btn line-btn" onclick="shareToLine('${announcement.id}'); return false;" title="LINEで共有">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                </svg>
+              </a>
+              <a href="#" class="share-btn bluesky-btn" onclick="shareToBluesky('${announcement.id}'); return false;" title="Blueskyで共有">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/>
+                </svg>
+              </a>
+            </div>
             ${isAdmin ? `
             <div class="announcement-actions">
               <button class="pin-btn" onclick="togglePin('${announcement.id}')">${announcement.pinned ? '📌 Unpin' : '📌 Pin'}</button>
               <button class="edit-btn" onclick="editAnnouncement('${announcement.id}')">✏️ Edit</button>
-              <button class="delete-btn" onclick="deleteAnnouncement('${announcement.id}')">  ️ Delete</button>
+              <button class="delete-btn" onclick="deleteAnnouncement('${announcement.id}')">🗑️ Delete</button>
             </div>
             ` : ''}
           </div>
@@ -1258,12 +1398,10 @@
       
       loadMoreContainer.style.display = hasMore ? 'flex' : 'none';
       
-      // Twitter widgets reload
       if (window.twttr && window.twttr.widgets) {
         window.twttr.widgets.load();
       }
       
-      // Intersection Observer for lazy loading images
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1288,12 +1426,28 @@
       const announcement = allAnnouncements.find(a => a.id === announcementId);
       if (!announcement) return;
 
-      announcement.pinned = !announcement.pinned;
+      if (announcement.pinned) {
+        announcement.pinned = false;
+        const success = await saveAllAnnouncementsToScript();
+        if (success) {
+          filterAndDisplayAnnouncements();
+          showToast('ピン留めを解除しました');
+        }
+        return;
+      }
+
+      const pinnedCount = allAnnouncements.filter(a => a.pinned).length;
+      if (pinnedCount >= 2) {
+        showToast('ピン留めは2つまでです。先に他のピン留めを解除してください。');
+        return;
+      }
+
+      announcement.pinned = true;
       
       const success = await saveAllAnnouncementsToScript();
       if (success) {
         filterAndDisplayAnnouncements();
-        showToast(announcement.pinned ? 'ピン留めし   した' : 'ピン留めを解除しました');
+        showToast('ピン留めしました');
       }
     }
 
@@ -1329,11 +1483,11 @@
             </div>
             <div class="form-group">
               <label for="embedCode">Embed Code / Spotify URL</label>
-              <textarea id="embedCode" placeholder="埋め込みコ  ド (iframe, blockquote, etc.) またはSpotify URL (https://open.spotify.com/...)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
+              <textarea id="embedCode" placeholder="埋め込みコード (iframe, blockquote, etc.) またはSpotify URL (https://open.spotify.com/...)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
             </div>
             <div class="form-group">
               <label for="content">Content</label>
-              <textarea id="content" placeholder="メッセージを入力 (URLは自動で  ンクになります)">${announcement?.content || ''}</textarea>
+              <textarea id="content" placeholder="メッセージを入力 (URLは自動でリンクになります)">${announcement?.content || ''}</textarea>
             </div>
             <div class="form-buttons">
               <button type="submit" class="submit-btn">${announcement ? 'Update' : 'Post'}</button>
@@ -1368,7 +1522,7 @@
       const category = document.getElementById('category').value;
 
       if (!content && !imageUrl && !embedCode) {
-        showToast('コンテンツ、画像URL、または埋め込みコードを入力してくだ   い');
+        showToast('コンテンツ、画像URL、または埋め込みコードを入力してください');
         return;
       }
 
@@ -1452,7 +1606,6 @@
         updateCategories();
         showToast('削除しました');
       } else {
-        // Restore on failure
         allAnnouncements.splice(index, 0, deletedAnnouncement);
       }
     }
@@ -1471,5 +1624,5 @@
 
     initializeApp();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6f27f671ba2635',t:'MTc2NDU1NjE1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6f8450d746b200',t:'MTc2NDU1OTk0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
