@@ -995,6 +995,34 @@
       return text.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #ffb6d9; text-decoration: underline;">$1</a>');
     }
 
+    function convertSpotifyUrl(url) {
+      // Spotify URL patterns
+      const trackPattern = /https:\/\/open\.spotify\.com\/track\/([a-zA-Z0-9]+)/;
+      const albumPattern = /https:\/\/open\.spotify\.com\/album\/([a-zA-Z0-9]+)/;
+      const playlistPattern = /https:\/\/open\.spotify\.com\/playlist\/([a-zA-Z0-9]+)/;
+      const artistPattern = /https:\/\/open\.spotify\.com\/artist\/([a-zA-Z0-9]+)/;
+      
+      let match;
+      
+      if (match = url.match(trackPattern)) {
+        return `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/${match[1]}" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+      }
+      
+      if (match = url.match(albumPattern)) {
+        return `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/${match[1]}" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+      }
+      
+      if (match = url.match(playlistPattern)) {
+        return `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/${match[1]}" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+      }
+      
+      if (match = url.match(artistPattern)) {
+        return `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/${match[1]}" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+      }
+      
+      return null;
+    }
+
     function renderAnnouncements() {
       const container = document.getElementById('announcementsContainer');
       
@@ -1016,7 +1044,18 @@
           : `<div class="announcement-avatar">📢</div>`;
         
         const imageHTML = announcement.imageUrl ? `<div style="margin: 1rem 0;"><img src="${announcement.imageUrl}" alt="Post image" style="max-width: 100%; border-radius: 12px; display: block;" onerror="this.style.display='none';"></div>` : '';
-        const embedHTML = announcement.embedCode ? `<div class="embed-container">${announcement.embedCode}</div>` : '';
+        
+        // Check if embed code is a Spotify URL and convert it
+        let embedHTML = '';
+        if (announcement.embedCode) {
+          const spotifyEmbed = convertSpotifyUrl(announcement.embedCode.trim());
+          if (spotifyEmbed) {
+            embedHTML = `<div class="embed-container">${spotifyEmbed}</div>`;
+          } else {
+            embedHTML = `<div class="embed-container">${announcement.embedCode}</div>`;
+          }
+        }
+        
         const contentHTML = announcement.content ? `<div class="announcement-content">${linkifyText(announcement.content)}</div>` : '';
         
         return `
@@ -1096,8 +1135,8 @@
               <input type="url" id="imageUrl" placeholder="https://..." value="${announcement?.imageUrl || ''}">
             </div>
             <div class="form-group">
-              <label for="embedCode">Embed Code (YouTube, Twitter, etc.)</label>
-              <textarea id="embedCode" placeholder="埋め込みコードを貼り付け (iframe, blockquote, etc.)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
+              <label for="embedCode">Embed Code / Spotify URL</label>
+              <textarea id="embedCode" placeholder="埋め込みコード (iframe, blockquote, etc.) またはSpotify URL (https://open.spotify.com/...)" style="min-height: 100px;">${announcement?.embedCode || ''}</textarea>
             </div>
             <div class="form-group">
               <label for="content">Content</label>
@@ -1239,5 +1278,5 @@
 
     initializeApp();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6882b7e6299802',t:'MTc2NDQ4NjQ3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a6ec14f40a8eb86',t:'MTc2NDU1MTk1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
