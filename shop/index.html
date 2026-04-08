@@ -6,51 +6,47 @@
   <title>Shop</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&amp;family=Cormorant+Garamond:wght@400;500;600&amp;display=swap" rel="stylesheet">
   <style>
-    html, body { height: 100%; margin: 0; }
-    body { font-family: 'Noto Sans JP', sans-serif; }
-    .font-display { font-family: 'Cormorant Garamond', serif; }
-    .slide-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); }
-    .slider-dot.active { background: var(--color-text); }
-    .slider-dot { background: var(--color-secondary); }
-    .product-card { border: 1px solid var(--color-secondary); }
-    .qty-btn { border: 1px solid var(--color-secondary); }
-    :root {
-      --color-bg: #f7f6f3;
-      --color-surface: #ffffff;
-      --color-text: #2c2c2c;
-      --color-primary: #2c2c2c;
-      --color-secondary: #d4d0c8;
-    }
-  </style>
+html, body { height: 100%; margin: 0; }
+body { font-family: 'Noto Sans JP', sans-serif; }
+.font-display { font-family: 'Cormorant Garamond', serif; }
+.slide-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); }
+.slider-dot.active { background: var(--color-text); }
+.slider-dot { background: var(--color-secondary); }
+.product-card { border: 1px solid var(--color-secondary); }
+.qty-btn { border: 1px solid var(--color-secondary); }
+:root {
+--color-bg: #f7f6f3;
+--color-surface: #ffffff;
+--color-text: #2c2c2c;
+--color-primary: #2c2c2c;
+--color-secondary: #d4d0c8;
+}
+</style>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full overflow-auto" style="background:var(--color-bg); color:var(--color-text);">
-  <div id="app" class="w-full min-h-full flex flex-col"><!-- Header -->
+  <div id="app" class="w-full min-h-full flex flex-col">
    <header class="w-full py-8 text-center border-b" style="border-color:var(--color-secondary); background:var(--color-surface);">
-    <h1 id="shop-name" class="font-display text-4xl md:text-5xl font-500 tracking-wide" style="color:var(--color-text);">Rabbitflower Shop</h1>
+    <h1 id="shop-name" class="font-display text-4xl md:text-5xl font-500 tracking-wide">Rabbitflower Shop</h1>
     <p id="shop-tagline" class="mt-2 text-sm tracking-widest uppercase opacity-60">Handmade Works</p>
-   </header><!-- Products -->
+   </header>
    <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-12">
-    <div id="product-list" class="grid grid-cols-1 gap-16"><!-- Products rendered by JS -->
-    </div>
-   </main><!-- Footer -->
-   <footer class="w-full py-6 text-center text-xs opacity-40 border-t" style="border-color:var(--color-secondary);">
+    <div id="product-list" class="grid grid-cols-1 gap-16"></div>
+   </main>
+   <footer class="w-full py-6 text-center text-xs opacity-40 border-t">
     <p>© 2025 Your Shop. All rights reserved.</p>
    </footer>
   </div>
   <script>
-// ============================================================
-// 商品データ — ここを編集するだけで商品を追加できます
-// ============================================================
 const PRODUCTS = [
   {
     id: "product-1",
     title: "Rabbitflower Doll#91 [water color]",
-    price: 3800,
+    price: 6800,
     description: "ペン・水彩絵の具・アクリル絵の具などを使った原画イラスト
 Original artwork using pen, watercolor, acrylic paint, etc.
 
@@ -75,236 +71,208 @@ Since we also sell on other websites, there is a possibility that the item may b
 * There may be slight color differences between the actual product and the image depending on your display environment.",
     details: [
       { label: "サイズ", value: "A5" },
-      { label: "イラスト", value: "水彩画" },
-      { label: "制作年", value: "2026" },
+      { label: "イラスト", value: "原画, ペン画, 水彩画, オリジナル" },
+      { label: "制作年", value: "2026" }
     ],
-    // 画像URLを差し替えてください（3枚推奨）
     images: [
-      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80",
-      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=600&q=80",
-      "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=600&q=80",
+      "https://via.placeholder.com/800x600?text=Ceramic+Vase+1",
+      "https://via.placeholder.com/800x600?text=Ceramic+Vase+2",
+      "https://via.placeholder.com/800x600?text=Ceramic+Vase+3"
     ],
     maxQty: 1,
-    // PayPal.meリンク例: https://www.paypal.me/yourname/3800JPY
     paypalLink: "https://www.paypal.com/ncp/payment/CEBVE2U6N9EV2",
-    soldOut: false,
+    soldOut: false
   },
   {
     id: "product-2",
-    title: "作品タイトル B",
-    price: 5200,
-    description: "二つ目の作品の説明です。世界観やこだわりのポイントを自由に書いてください。",
+    title: "Wooden Bowl",
+    price: 4500,
+    description: "Handcrafted wooden bowl with natural finish",
     details: [
-      { label: "サイズ", value: "20 × 15 cm" },
-      { label: "素材", value: "木材・漆" },
-      { label: "制作年", value: "2024" },
+      { label: "Diameter", value: "20cm" },
+      { label: "Material", value: "Walnut Wood" },
+      { label: "Treatment", value: "Natural Oil" }
     ],
     images: [
-      "https://images.unsplash.com/photo-1513519245088-0e12902e35a6?w=600&q=80",
-      "https://images.unsplash.com/photo-1460411794035-42aac080490a?w=600&q=80",
-      "https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=600&q=80",
+      "https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=800",
+      "https://images.unsplash.com/photo-1565799033546-5f0905e5a948?w=800",
+      "https://images.unsplash.com/photo-1587462954470-df1b58fb88c9?w=800"
     ],
     maxQty: 3,
-    paypalLink: "https://www.paypal.me/yourname/5200JPY",
-    soldOut: false,
-  },
+    paypalLink: "https://www.paypal.me/yourname/4500JPY",
+    soldOut: false
+  }
 ];
 
-// ============================================================
-// Rendering
-// ============================================================
-const quantities = {};
+const sliderStates = {};
+let quantities = {};
+
+function init() {
+  PRODUCTS.forEach(product => {
+    quantities[product.id] = 1;
+    sliderStates[product.id] = 0;
+  });
+  renderProducts();
+}
 
 function renderProducts() {
-  const container = document.getElementById('product-list');
-  container.innerHTML = '';
-
-  PRODUCTS.forEach(product => {
-    if (!(product.id in quantities)) quantities[product.id] = 1;
-    const qty = quantities[product.id];
-
-    const card = document.createElement('div');
-    card.className = 'product-card rounded-sm overflow-hidden';
-    card.style.background = 'var(--color-surface)';
-
-    const totalPrice = product.price * qty;
-    const payLink = product.paypalLink.replace(/\/[\d]+JPY/, `/${totalPrice}JPY`);
-
-    card.innerHTML = `
-      <div class="md:flex">
-        <!-- Slider -->
-        <div class="md:w-1/2 relative overflow-hidden" style="aspect-ratio:4/3;">
-          <div class="slide-track h-full" data-slider="${product.id}" style="width:${product.images.length * 100}%;">
-            ${product.images.map(src => `
-              <div class="h-full" style="width:${100 / product.images.length}%;">
-                <img src="${src}" alt="${product.title}" loading="lazy" class="w-full h-full object-cover"
-                  onerror="this.style.background='var(--color-secondary)';this.alt='Image unavailable';">
-              </div>
+  const productList = document.getElementById('product-list');
+  productList.innerHTML = PRODUCTS.map(product => {
+    const currentSlide = sliderStates[product.id] || 0;
+    return `
+    <div class="product-card p-8" data-product-id="${product.id}" style="background:var(--color-surface);">
+      <div class="relative mb-8">
+        <div class="overflow-hidden bg-gray-100 rounded" style="aspect-ratio: 4/3;">
+          <div class="slide-track" style="width: ${product.images.length * 100}%; transform: translateX(-${currentSlide * 100 / product.images.length}%);">
+            ${product.images.map((img, idx) => `
+            <img src="${img}" alt="Product image ${idx + 1}" loading="lazy" 
+            style="width: ${100 / product.images.length}%; object-fit: cover; flex-shrink: 0;">
             `).join('')}
           </div>
-          ${product.images.length > 1 ? `
-          <button class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity" style="background:var(--color-surface);" onclick="slide('${product.id}',-1)">
-            <i data-lucide="chevron-left" style="width:16px;height:16px;"></i>
+        </div>
+        
+        ${product.images.length > 1 ? `
+        <button onclick="prevSlide('${product.id}')" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded hover:bg-white transition" style="color:var(--color-text);">
+          <i data-lucide="chevron-left" style="width:20px; height:20px;"></i>
+        </button>
+        <button onclick="nextSlide('${product.id}')" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded hover:bg-white transition" style="color:var(--color-text);">
+          <i data-lucide="chevron-right" style="width:20px; height:20px;"></i>
+        </button>
+        <div class="flex gap-2 justify-center mt-3">
+          ${product.images.map((_, idx) => `
+          <button onclick="goToSlide('${product.id}', ${idx})" 
+          class="slider-dot w-2 h-2 rounded-full transition ${idx === currentSlide ? 'active' : ''}"
+          style="cursor:pointer;">
           </button>
-          <button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity" style="background:var(--color-surface);" onclick="slide('${product.id}',1)">
-            <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
-          </button>
-          <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-            ${product.images.map((_, i) => `<button class="slider-dot w-2 h-2 rounded-full ${i === 0 ? 'active' : ''}" onclick="goTo('${product.id}',${i})"></button>`).join('')}
-          </div>
-          ` : ''}
+          `).join('')}
+        </div>
+        ` : ''}
+      </div>
+
+      <div class="space-y-6">
+        <div>
+          <h2 class="font-display text-2xl md:text-3xl font-500 tracking-wide mb-2">${product.title}</h2>
+          <p class="text-sm opacity-70">${product.description}</p>
         </div>
 
-        <!-- Info -->
-        <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
-          <div>
-            <h2 class="font-display text-2xl md:text-3xl font-500">${product.title}</h2>
-            <p class="mt-1 text-xl font-light">¥${product.price.toLocaleString()}<span class="text-xs ml-1 opacity-50">（税込）</span></p>
-            <p class="mt-4 text-sm leading-relaxed opacity-70">${product.description}</p>
-            <dl class="mt-4 text-sm space-y-1">
-              ${product.details.map(d => `
-                <div class="flex gap-2">
-                  <dt class="opacity-40 w-16 shrink-0">${d.label}</dt>
-                  <dd>${d.value}</dd>
-                </div>
-              `).join('')}
-            </dl>
+        ${product.details.length > 0 ? `
+        <div class="text-sm space-y-1 py-4" style="border-top: 1px solid var(--color-secondary); border-bottom: 1px solid var(--color-secondary);">
+          ${product.details.map(detail => `
+          <div class="flex justify-between">
+            <span class="opacity-60">${detail.label}</span>
+            <span class="font-500">${detail.value}</span>
+          </div>
+          `).join('')}
+        </div>
+        ` : ''}
+
+        <div class="space-y-4">
+          <div class="flex justify-between items-baseline">
+            <span class="text-sm opacity-60">Price</span>
+            <span id="price-${product.id}" class="font-display text-3xl font-600">¥${product.price.toLocaleString()}</span>
           </div>
 
-          <div class="mt-6 pt-4 border-t" style="border-color:var(--color-secondary);">
-            ${product.soldOut ? `
-              <p class="text-center py-3 text-sm tracking-widest opacity-40">SOLD OUT</p>
-            ` : `
-              <!-- Quantity -->
-              <div class="flex items-center gap-3 mb-4">
-                <span class="text-xs opacity-50 uppercase tracking-wider">数量</span>
-                <button class="qty-btn w-7 h-7 rounded-sm flex items-center justify-center text-sm hover:opacity-70 transition-opacity" onclick="changeQty('${product.id}',-1)">−</button>
-                <span class="w-6 text-center text-sm" id="qty-${product.id}">${qty}</span>
-                <button class="qty-btn w-7 h-7 rounded-sm flex items-center justify-center text-sm hover:opacity-70 transition-opacity" onclick="changeQty('${product.id}',1)">+</button>
-                <span class="text-xs opacity-40 ml-auto">合計 ¥${totalPrice.toLocaleString()}</span>
-              </div>
-              <!-- PayPal -->
-              <a href="${payLink}" target="_blank" rel="noopener noreferrer"
-                class="block w-full text-center py-3 rounded-sm text-sm tracking-wider transition-opacity hover:opacity-80"
-                style="background:var(--color-primary); color:var(--color-surface);">
-                PayPalで購入する
-              </a>
-              <p class="mt-2 text-center text-xs opacity-30">※ PayPalの決済ページに移動します</p>
-            `}
+          <div class="flex items-center gap-4">
+            <span class="text-sm opacity-60">Quantity</span>
+            <div class="flex gap-2">
+              <button onclick="changeQty('${product.id}', -1)" class="qty-btn w-10 h-10 flex items-center justify-center rounded hover:opacity-70 transition" style="color:var(--color-text);">
+                <i data-lucide="minus" style="width:18px; height:18px;"></i>
+              </button>
+              <input type="number" id="qty-${product.id}" value="1" min="1" max="${product.maxQty}" class="w-12 text-center border rounded" style="border-color:var(--color-secondary); color:var(--color-text);" onchange="updateQty('${product.id}', this.value)">
+              <button onclick="changeQty('${product.id}', 1)" class="qty-btn w-10 h-10 flex items-center justify-center rounded hover:opacity-70 transition" style="color:var(--color-text);">
+                <i data-lucide="plus" style="width:18px; height:18px;"></i>
+              </button>
+            </div>
           </div>
+
+          <div class="flex justify-between items-baseline py-4" style="border-top: 1px solid var(--color-secondary);">
+            <span class="text-sm opacity-60">Total</span>
+            <span id="total-${product.id}" class="font-display text-3xl font-600">¥${product.price.toLocaleString()}</span>
+          </div>
+
+          ${!product.soldOut ? `
+          <a href="javascript:void(0);" onclick="goToPayPal('${product.id}')" id="paypal-${product.id}" 
+          class="block w-full py-3 rounded text-center text-white font-500 transition hover:opacity-90"
+          style="background:var(--color-primary);">
+          Pay with PayPal
+          </a>
+          ` : `
+          <div class="w-full py-3 text-center rounded opacity-50">Sold Out</div>
+          `}
         </div>
       </div>
+    </div>
     `;
-    container.appendChild(card);
-  });
+  }).join('');
 
   lucide.createIcons();
 }
 
-// Slider state
-const sliderIndex = {};
-
-function slide(id, dir) {
-  const product = PRODUCTS.find(p => p.id === id);
-  if (!product) return;
-  const max = product.images.length - 1;
-  sliderIndex[id] = Math.max(0, Math.min(max, (sliderIndex[id] || 0) + dir));
-  updateSlider(id);
+function nextSlide(productId) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  sliderStates[productId] = (sliderStates[productId] + 1) % product.images.length;
+  updateSlider(productId);
 }
 
-function goTo(id, i) {
-  sliderIndex[id] = i;
-  updateSlider(id);
+function prevSlide(productId) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  sliderStates[productId] = (sliderStates[productId] - 1 + product.images.length) % product.images.length;
+  updateSlider(productId);
 }
 
-function updateSlider(id) {
-  const idx = sliderIndex[id] || 0;
-  const track = document.querySelector(`[data-slider="${id}"]`);
-  if (track) track.style.transform = `translateX(-${idx * (100 / PRODUCTS.find(p => p.id === id).images.length)}%)`;
-  // Update dots
-  const card = track.closest('.product-card');
-  card.querySelectorAll('.slider-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === idx);
-  });
+function goToSlide(productId, idx) {
+  sliderStates[productId] = idx;
+  updateSlider(productId);
 }
 
-function changeQty(id, dir) {
-  const product = PRODUCTS.find(p => p.id === id);
-  if (!product) return;
-  quantities[id] = Math.max(1, Math.min(product.maxQty, (quantities[id] || 1) + dir));
-  renderProducts();
-  // Restore slider position
-  if (sliderIndex[id]) updateSlider(id);
-}
-
-// ============================================================
-// Element SDK
-// ============================================================
-const defaultConfig = {
-  shop_name: "Your Shop",
-  shop_tagline: "Handmade Works",
-  background_color: "#f7f6f3",
-  surface_color: "#ffffff",
-  text_color: "#2c2c2c",
-  primary_color: "#2c2c2c",
-  secondary_color: "#d4d0c8",
-  font_family: "Noto Sans JP",
-  font_size: 14,
-};
-
-function applyConfig(config) {
-  const c = { ...defaultConfig, ...config };
-
-  document.documentElement.style.setProperty('--color-bg', c.background_color);
-  document.documentElement.style.setProperty('--color-surface', c.surface_color);
-  document.documentElement.style.setProperty('--color-text', c.text_color);
-  document.documentElement.style.setProperty('--color-primary', c.primary_color);
-  document.documentElement.style.setProperty('--color-secondary', c.secondary_color);
-
-  document.body.style.background = c.background_color;
-  document.body.style.color = c.text_color;
-  document.body.style.fontFamily = `${c.font_family}, 'Noto Sans JP', sans-serif`;
-  document.body.style.fontSize = `${c.font_size}px`;
-
-  const nameEl = document.getElementById('shop-name');
-  const tagEl = document.getElementById('shop-tagline');
-  if (nameEl) nameEl.textContent = c.shop_name;
-  if (tagEl) tagEl.textContent = c.shop_tagline;
-
-  const header = document.querySelector('header');
-  if (header) { header.style.borderColor = c.secondary_color; header.style.background = c.surface_color; }
-  const footer = document.querySelector('footer');
-  if (footer) footer.style.borderColor = c.secondary_color;
-}
-
-if (window.elementSdk) {
-  window.elementSdk.init({
-    defaultConfig,
-    onConfigChange: async (config) => applyConfig(config),
-    mapToCapabilities: (config) => {
-      const c = { ...defaultConfig, ...config };
-      const mk = (key) => ({
-        get: () => c[key] || defaultConfig[key],
-        set: (v) => { c[key] = v; window.elementSdk.setConfig({ [key]: v }); }
-      });
-      return {
-        recolorables: [mk('background_color'), mk('surface_color'), mk('text_color'), mk('primary_color'), mk('secondary_color')],
-        borderables: [],
-        fontEditable: mk('font_family'),
-        fontSizeable: mk('font_size'),
-      };
-    },
-    mapToEditPanelValues: (config) => {
-      const c = { ...defaultConfig, ...config };
-      return new Map([
-        ["shop_name", c.shop_name],
-        ["shop_tagline", c.shop_tagline],
-      ]);
+function updateSlider(productId) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  const idx = sliderStates[productId];
+  
+  const card = document.querySelector(`[data-product-id="${productId}"]`);
+  if (card) {
+    const track = card.querySelector('.slide-track');
+    if (track) {
+      track.style.transform = `translateX(-${idx * 100 / product.images.length}%)`;
     }
-  });
+    
+    const dots = card.querySelectorAll('.slider-dot');
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === idx);
+    });
+  }
 }
 
-renderProducts();
+function changeQty(productId, delta) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  const input = document.getElementById(`qty-${productId}`);
+  let newQty = parseInt(input.value) + delta;
+  newQty = Math.max(1, Math.min(newQty, product.maxQty));
+  input.value = newQty;
+  updateQty(productId, newQty);
+}
+
+function updateQty(productId, value) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  const qty = Math.max(1, Math.min(parseInt(value), product.maxQty));
+  quantities[productId] = qty;
+
+  const total = product.price * qty;
+  document.getElementById(`price-${productId}`).textContent = `¥${product.price.toLocaleString()}`;
+  document.getElementById(`total-${productId}`).textContent = `¥${total.toLocaleString()}`;
+  document.getElementById(`qty-${productId}`).value = qty;
+}
+
+function goToPayPal(productId) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  const qty = quantities[productId] || 1;
+  const total = product.price * qty;
+
+  const paypalUrl = product.paypalLink.replace(/\/[\d]+JPY/, `/${total}JPY`);
+  window.open(paypalUrl, '_blank', 'noopener,noreferrer');
+}
+
+init();
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e9253a6403de87a',t:'MTc3NTY2MjM2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e9264bef16b80ef',t:'MTc3NTY2MzA2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
