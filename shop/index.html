@@ -31,8 +31,8 @@
  <body class="h-full overflow-auto" style="background:var(--color-bg); color:var(--color-text);">
   <div id="app" class="w-full min-h-full flex flex-col"><!-- Header -->
    <header class="w-full py-8 text-center border-b" style="border-color:var(--color-secondary); background:var(--color-surface);">
-    <h1 id="shop-name" class="font-display text-4xl md:text-5xl font-500 tracking-wide" style="color:var(--color-text);">Your Shop</h1>
-    <p id="shop-tagline" class="mt-2 text-sm tracking-widest uppercase opacity-60">Handmade Works</p>
+    <h1 id="shop-name" class="font-display text-4xl md:text-5xl font-500 tracking-wide" style="color:var(--color-text);">Rabbitflower Illustration</h1>
+    <p id="shop-tagline" class="mt-2 text-sm tracking-widest uppercase opacity-60">Original artwork Works</p>
    </header><!-- Products -->
    <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-12">
     <div id="product-list" class="grid grid-cols-1 gap-16"><!-- Products rendered by JS -->
@@ -49,21 +49,42 @@
 const PRODUCTS = [
   {
     id: "product-1",
-    title: "作品タイトル A",
+    title: "Rabbitflower Doll#91 [water color]",
     price: 3800,
-    description: "作品の説明文をここに書きます。素材や制作背景など、お好きな情報を記載してください。",
+    description: "ペン・水彩絵の具・アクリル絵の具などを使った原画イラスト
+Original artwork using pen, watercolor, acrylic paint, etc.
+
+NFT:
+https://xrp.cafe/nft/000827108D3BB1B5DD412C0BC897016FC961D66C06CB9E9CB7ECCEEB04DB464F
+
+A5 size
+Clairefontaine watercolor paper
+Copic Multiliner
+Holbein watercolor paints
+Liquitex acrylic paints
+Turner acrylic paints
+
+The back of the artwork is hand-signed and stamped by the artist to guarantee its authenticity.
+
+Since we also sell on other websites, there is a possibility that the item may be out of stock depending on the timing. In that case, we may contact you to discuss cancellation or other options, so please understand.
+
+※送料を抑えるため、フレームはついておりません。
+* To keep shipping costs down, the picture frame is not included.
+
+※ お使いのディスプレイ環境によっては、実際の作品と画像の色味に若干の違いが生じる場合があります。
+* There may be slight color differences between the actual product and the image depending on your display environment.",
     details: [
-      { label: "サイズ", value: "15 × 10 × 5 cm" },
-      { label: "素材", value: "陶器" },
-      { label: "制作年", value: "2025" },
+      { label: "サイズ", value: "A4" },
+      { label: "水彩画", value: "イラスト"value: "ペン"value: "水彩絵の具"value: "アクリル絵の具" },
+      { label: "制作年", value: "2026" },
     ],
     // 画像URLを差し替えてください（3枚推奨）
     images: [
-      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=80",
-      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=600&q=80",
-      "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=600&q=80",
+      "https://booth.pximg.net/ded71add-27ce-4fd6-ac01-200ef503ff2c/i/8129349/b70a2fa8-1a52-43da-a3ed-4856b8d744da.jpeg",
+      "https://booth.pximg.net/ded71add-27ce-4fd6-ac01-200ef503ff2c/i/8129349/528e34ef-f52c-4506-89e0-c0304179aafa.jpeg",
+      "https://booth.pximg.net/ded71add-27ce-4fd6-ac01-200ef503ff2c/i/8129349/d69fe312-ccdf-4905-9c61-0a46641d52b9.jpeg",
     ],
-    maxQty: 5,
+    maxQty: 1,
     // PayPal.meリンク例: https://www.paypal.me/yourname/3800JPY
     paypalLink: "https://www.paypal.me/yourname/3800JPY",
     soldOut: false,
