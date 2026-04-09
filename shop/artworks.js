@@ -13,7 +13,7 @@ const artworks = [
     link: "",
     soldout: true
   }
-{
+  {
     title: "Rabbitflower Doll#92 [water color]",
     price: "",
     image: "/shop/images/092.jpg",
@@ -22,7 +22,7 @@ const artworks = [
   },
   {
     title: "Rabbitflower Doll#91 [water color]",
-    price: "\6800",
+    price: "6800 yen",
     image: "/shop/images/091.jpg",
     link: "https://www.paypal.com/ncp/payment/CEBVE2U6N9EV2",
     soldout: false
