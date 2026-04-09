@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #111;
-  color: #eee;
+  background-color: #e8d3d1;
+  color: #95859c;
 }
 
 /* ===== Header ===== */
@@ -18,7 +18,7 @@ h1 {
 }
 
 .subtitle {
-  color: #777;
+  color: #a6a5c4;
   font-size: 13px;
   margin-top: 10px;
   letter-spacing: 2px;
@@ -50,7 +50,7 @@ h1 {
 
 /* ===== Card ===== */
 .card {
-  background: #1a1a1a;
+  background: #e8d3d1;
   border-radius: 14px;
   overflow: hidden;
   transition: 0.3s;
@@ -78,14 +78,14 @@ h1 {
   font-family: 'Playfair Display', serif;
   font-size: 18px;
   letter-spacing: 1px;
-  color: #ddd;
+  color: #95859c;
   margin-bottom: 6px;
 }
 
 /* ===== Price ===== */
 .price {
   font-size: 13px;
-  color: #888;
+  color: #95859c;
   letter-spacing: 1px;
   margin-bottom: 18px;
 }
@@ -94,8 +94,8 @@ h1 {
 .button {
   display: inline-block;
   padding: 10px 22px;
-  background: #eee;
-  color: #111;
+  background: #e8d3d1;
+  color: #95859c;
   text-decoration: none;
   border-radius: 20px;
   font-size: 12px;
@@ -104,7 +104,7 @@ h1 {
 }
 
 .button:hover {
-  background: #ccc;
+  background: #e8d3d1;
 }
 
 /* ===== Sold Out ===== */
@@ -112,8 +112,8 @@ h1 {
   display: inline-block;
   padding: 10px 22px;
   border-radius: 20px;
-  background: #333;
-  color: #777;
+  background: #e8d3d1;
+  color: #95859c;
   font-size: 12px;
   letter-spacing: 1px;
 }
@@ -176,13 +176,13 @@ h1 {
   position: absolute;
   top: 20px;
   right: 40px;
-  color: #aaa;
+  color: #95859c;
   font-size: 30px;
   cursor: pointer;
 }
 
 .close:hover {
-  color: #fff;
+  color: #95859c;
 }
 
 /* アニメーション */
@@ -205,5 +205,5 @@ footer {
   width: 100%;         /* 横幅いっぱいを基準にする */
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
-  color: #666;         /* 少し控えめなグレー */
+  color: #95859c;         /* 少し控えめなグレー */
 }
