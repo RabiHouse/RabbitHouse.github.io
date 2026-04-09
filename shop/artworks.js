@@ -1,10 +1,10 @@
 const artworks = [
   {
     title: "Rabbitflower Doll#94 [water color]",
-    price: "\6800",
+    price: "",
     image: "images/094.jpg",
-    link: "https://www.paypal.com/ncp/payment/CEBVE2U6N9EV2",
-    soldout: false
+    link: "",
+    soldout: true
   },
   {
     title: "Rabbitflower Doll#93 [water color]",
@@ -22,10 +22,10 @@ const artworks = [
   },
   {
     title: "Rabbitflower Doll#91 [water color]",
-    price: "",
+    price: "\6800",
     image: "images/091.jpg",
-    link: "",
-    soldout: true
+    link: "https://www.paypal.com/ncp/payment/CEBVE2U6N9EV2",
+    soldout: false
   }
 
 ];
