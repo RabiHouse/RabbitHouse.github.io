@@ -1,133 +1,31 @@
-<!doctype html>
-<html lang="ja" class="h-full">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rabbitflower Shop</title>
+  <meta charset="UTF-8">
+  <title>Rabbitflower Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-html, body { height: 100%; margin: 0; }
-body { font-family: 'Noto Sans JP', sans-serif; }
-.font-display { font-family: 'Cormorant Garamond', serif; }
-
-.slide-track { display: flex; transition: transform 0.4s; }
-.slider-dot.active { background: var(--color-text); }
-.slider-dot { background: var(--color-secondary); }
-
-.product-card { border: 1px solid var(--color-secondary); }
-.qty-btn { border: 1px solid var(--color-secondary); }
-
-:root {
---color-bg: #f7f6f3;
---color-surface: #ffffff;
---color-text: #2c2c2c;
---color-primary: #2c2c2c;
---color-secondary: #d4d0c8;
-}
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
+<body>
 
-<body class="h-full overflow-auto" style="background:var(--color-bg); color:var(--color-text);">
+  <header>
+    <h1>Rabbitflower Shop</h1>
+    <p class="subtitle">Handmade works</p>
+  </header>
 
-<div id="app" class="w-full min-h-full flex flex-col">
+  <main>
+    <div id="gallery"></div>
+  </main>
 
-<header class="w-full py-8 text-center border-b" style="border-color:var(--color-secondary); background:var(--color-surface);">
-<h1 class="font-display text-4xl md:text-5xl">Rabbitflower Shop</h1>
-<p class="mt-2 text-sm tracking-widest uppercase opacity-60">Handmade Works</p>
-</header>
+  <script src="artworks.js"></script>
 
-<main class="flex-1 w-full max-w-5xl mx-auto px-4 py-12">
-<div id="product-list" class="grid grid-cols-1 gap-16"></div>
-</main>
-
-<footer class="w-full py-6 text-center text-xs opacity-40 border-t">
-<p>©Rabbitflower Diary. All rights reserved.</p>
-</footer>
-
+<div id="modal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modal-img">
 </div>
-
-<script>
-const PRODUCTS = [
-{
-id: "product-1",
-title: "Rabbitflower Doll#91 [water color]",
-price: 6800, // ← 修正（数値にする）
-description: "Original artwork using pen, watercolor, acrylic paint, etc.",
-details: [
-{ label: "size", value: "A5" },
-{ label: "イラスト", value: "原画, ペン画, 水彩画, オリジナル" },
-{ label: "制作年", value: "2026" }
-],
-images: [
-"https://via.placeholder.com/800x1131?text=1",
-"https://via.placeholder.com/800x1131?text=2",
-"https://via.placeholder.com/800x1131?text=3"
-],
-paypalLink: "https://www.paypal.com/ncp/payment/CEBVE2U6N9EV2",
-soldOut: false
-}
-];
-
-const sliderStates = {};
-let quantities = {};
-
-function init() {
-PRODUCTS.forEach(p => {
-quantities[p.id] = 1;
-sliderStates[p.id] = 0;
-});
-renderProducts();
-}
-
-function renderProducts() {
-const productList = document.getElementById('product-list');
-
-productList.innerHTML = PRODUCTS.map(product => {
-const currentSlide = sliderStates[product.id] || 0;
-
-return `
-<div class="product-card p-8" data-product-id="${product.id}" style="background:var(--color-surface);">
-
-<div class="relative mb-8">
-<div class="overflow-hidden bg-white rounded flex items-center justify-center" style="aspect-ratio: 148 / 210;">
-<div class="slide-track" style="width:${product.images.length * 100}%; transform:translateX(-${currentSlide * 100 / product.images.length}%);">
-
-${product.images.map(img => `
-<img src="${img}" style="width:${100 / product.images.length}%; object-fit:contain;">
-`).join('')}
-
-</div>
-</div>
-</div>
-
-<h2 class="font-display text-2xl">${product.title}</h2>
-<p class="text-sm opacity-70">${product.description}</p>
-
-<div class="mt-4 text-2xl">¥${product.price.toLocaleString()}</div>
-
-<button onclick="goToPayPal('${product.id}')" class="mt-4 w-full py-3 bg-black text-white">
-Pay with PayPal
-</button>
-
-</div>
-`;
-}).join('');
-
-lucide.createIcons();
-}
-
-function goToPayPal(productId) {
-const product = PRODUCTS.find(p => p.id === productId);
-window.open(product.paypalLink, '_blank');
-}
-
-init();
-</script>
-
 </body>
 </html>

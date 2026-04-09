@@ -1,0 +1,200 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #111;
+  color: #eee;
+}
+
+/* ===== Header ===== */
+header {
+  text-align: center;
+  padding: 70px 20px 40px;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 3px;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 13px;
+  margin-top: 10px;
+  letter-spacing: 2px;
+}
+
+/* ===== Gallery ===== */
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 50px;
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 900px) {
+  #gallery {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px;
+  }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 500px) {
+  #gallery {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+}
+
+/* ===== Card ===== */
+.card {
+  background: #1a1a1a;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+/* ===== Image ===== */
+.card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+/* ===== Content ===== */
+.card-content {
+  padding: 20px 18px 22px;
+  text-align: left; /* ← ギャラリー風 */
+}
+
+/* ===== Title ===== */
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #ddd;
+  margin-bottom: 6px;
+}
+
+/* ===== Price ===== */
+.price {
+  font-size: 13px;
+  color: #888;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+
+/* ===== Button ===== */
+.button {
+  display: inline-block;
+  padding: 10px 22px;
+  background: #eee;
+  color: #111;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: 0.2s;
+}
+
+.button:hover {
+  background: #ccc;
+}
+
+/* ===== Sold Out ===== */
+.soldout {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 20px;
+  background: #333;
+  color: #777;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* ===== Sold Effect ===== */
+.card.sold {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.card.sold img {
+  filter: grayscale(100%);
+}
+
+/* ===== Image Zoom ===== */
+.image-wrap {
+  overflow: hidden;
+}
+
+.image-wrap img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* ホバーでズーム */
+.card:hover .image-wrap img {
+  transform: scale(1.05);
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+/* ===== Modal ===== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* 画像 */
+.modal-content {
+  display: block;
+  margin: auto;
+  max-width: 90%;
+  max-height: 85%;
+  animation: fadeIn 0.3s ease;
+}
+
+/* 閉じるボタン */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #aaa;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.image-wrap img {
+  cursor: zoom-in;
+}
+
+.card:hover img {
+  filter: brightness(0.9);
+}
