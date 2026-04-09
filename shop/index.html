@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <title>Rabbitflower Shop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="/shop/style.css">
 </head>
 <body>
@@ -21,11 +18,11 @@
     <div id="gallery"></div>
   </main>
 
-  <script src="artworks.js"></script>
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img">
+  </div>
 
-<div id="modal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="modal-img">
-</div>
+  <script src="artworks.js"></script>
 </body>
 </html>
