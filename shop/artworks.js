@@ -28,28 +28,30 @@ const artworks = [
     soldout: false
   }
 ];
-const gallery = document.getElementById("gallery");
+document.addEventListener("DOMContentLoaded", function () {
+  const gallery = document.getElementById("gallery");
 
-artworks.forEach(item => {
-  const card = document.createElement("div");
-  card.className = item.soldout ? "card sold" : "card";
+  artworks.forEach(item => {
+    const card = document.createElement("div");
+    card.className = item.soldout ? "card sold" : "card";
 
-  let buttonHTML = item.soldout
-    ? `<div class="soldout">Sold Out</div>`
-    : `<a href="${item.link}" class="button" target="_blank">Buy</a>`;
+    let buttonHTML = item.soldout
+      ? `<div class="soldout">Sold Out</div>`
+      : `<a href="${item.link}" class="button" target="_blank">Buy</a>`;
 
-  card.innerHTML = `
-  <div class="image-wrap">
-    <img src="${item.image}" alt="${item.title}">
-  </div>
-  <div class="card-content">
-    <div class="title">${item.title}</div>
-    <div class="price">${item.price}</div>
-    ${buttonHTML}
-  </div>
-`;
+    card.innerHTML = `
+      <div class="image-wrap">
+        <img src="${item.image}" alt="${item.title}">
+      </div>
+      <div class="card-content">
+        <div class="title">${item.title}</div>
+        <div class="price">${item.price}</div>
+        ${buttonHTML}
+      </div>
+    `;
 
-  gallery.appendChild(card);
+    gallery.appendChild(card);
+  });
 });
 
 // ===== Modal =====
