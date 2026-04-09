@@ -198,3 +198,12 @@ h1 {
 .card:hover img {
   filter: brightness(0.9);
 }
+
+footer {
+  text-align: center;  /* 文字を真ん中に寄せる */
+  padding: 50px 0;     /* 上下に余白を作る */
+  width: 100%;         /* 横幅いっぱいを基準にする */
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #666;         /* 少し控えめなグレー */
+}
