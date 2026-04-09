@@ -4,21 +4,21 @@ const artworks = [
     price: "8300",
     image: "./images/094.jpg",
     link: "https://www.paypal.com/ncp/payment/ELVHS843KVW7L",
-    soldout: true
+    soldout: false
   },
   {
     title: "Rabbitflower Doll#93 [water color]",
     price: "6800",
     image: "./images/093.jpg",
     link: "https://www.paypal.com/ncp/payment/27SLYCT98JDTY",
-    soldout: true
+    soldout: false
   },
   {
     title: "Rabbitflower Doll#92 [water color]",
     price: "8200 yen",
     image: "./images/092.jpg",
     link: "https://www.paypal.com/ncp/payment/GBNMA3RLLBNLQ",
-    soldout: true
+    soldout: false
   },
   {
     title: "Rabbitflower Doll#91 [water color]",
