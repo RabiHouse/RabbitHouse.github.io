@@ -1,18 +1,33 @@
 const artworks = [
   {
-    title: "Spring Whisper",
-    price: "$50",
-    image: "images/art1.jpg",
-    link: "https://paypal.me/yourlink1",
+    title: "Rabbitflower Doll#94 [water color]",
+    price: "\6800",
+    image: "images/094.jpg",
+    link: "https://www.paypal.com/ncp/payment/CEBVE2U6N9EV2",
     soldout: false
   },
   {
-    title: "Silent Bloom",
-    price: "$70",
-    image: "images/art2.jpg",
-    link: "https://paypal.me/yourlink2",
+    title: "Rabbitflower Doll#93 [water color]",
+    price: "",
+    image: "images/093.jpg",
+    link: "",
     soldout: true
   }
+{
+    title: "Rabbitflower Doll#92 [water color]",
+    price: "",
+    image: "images/092.jpg",
+    link: "",
+    soldout: true
+  },
+  {
+    title: "Rabbitflower Doll#91 [water color]",
+    price: "",
+    image: "images/091.jpg",
+    link: "",
+    soldout: true
+  }
+
 ];
 
 const gallery = document.getElementById("gallery");
