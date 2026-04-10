@@ -1,5 +1,11 @@
 const artworks = [
   {
+    title: "Rabbitflower Doll#95 [water color]",
+    image: "./images/095.jpg",
+    link: "https://www.paypal.com/ncp/payment/ELVHS843KVW7L",
+    soldout: false
+  },
+  {
     title: "Rabbitflower Doll#94 [water color]",
     image: "./images/094.jpg",
     link: "https://www.paypal.com/ncp/payment/ELVHS843KVW7L",
