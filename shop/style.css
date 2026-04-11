@@ -22,6 +22,8 @@ h1 {
   font-size: 13px;
   margin-top: 10px;
   letter-spacing: 2px;
+  color: inherit;       /* 親要素（pタグ）の色を引き継ぐ */
+  text-decoration: none; /* 下線を消す */
 }
 
 /* ===== Gallery ===== */
