@@ -1,0 +1,6 @@
+title: rabiko blog
+url: https://timothy.rabbitflowerdiary.com
+baseurl: /rabiko
+
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
