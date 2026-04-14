@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "USALOVER#100"
+title:  "Rabbitflower Doll#92 [water color]"
 author: Rabbitflower
-categories: [NFT, illust, USALOVER]
-tags: [NFT, rabbit, illust, xrp.cafe, xrp, PFP]
+categories: [NFT, illust, RabbitflowerDoll]
+tags: [NFT, comic, girl, illust, xrp.cafe, xrp]
 image: assets/images/webp/nft2.webp
 ---
 
