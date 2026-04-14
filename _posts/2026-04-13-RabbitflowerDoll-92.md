@@ -4,7 +4,7 @@ title:  "USALOVER#100"
 author: Rabbitflower
 categories: [NFT, illust, USALOVER]
 tags: [NFT, rabbit, illust, xrp.cafe, xrp, PFP]
-image: assets/images/webp/nft1.webp
+image: assets/images/webp/nft2.webp
 ---
 
 🐰	Rabbitflower Doll#92 [water color]     
