@@ -12,7 +12,7 @@ Cowgirl in the sunset.
 *This NFT has been sold and an owner has been found.  
 <!--more-->
 <div style="text-align: center;"><a target="_blank" href="https://timothy.rabbitflowerdiary.com/shop/index" class="btn btn-primary">MySHOP</a></div>  
-  <dr>
+  <dr>  
 <div style="text-align: center;"><a target="_blank" href="https://xrp.cafe/nft/000827108D3BB1B5DD412C0BC897016FC961D66C06CB9E9CCED29FEA04DB4650" class="btn btn-primary">XRP.cafe</a></div>  
 
 <br>
