@@ -18,6 +18,25 @@ content:
         type: string
         default: post
         required: true
+      - name: author
+        label: 著者
+        type: string
+        default: Rabbitflower # 自動で「Rabbitflower」が入るようにしています
+        required: true
+      - name: image
+        label: サムネイル画像
+        type: image
+        # ↓お使いのwebpフォルダに自動で保存されるように調整しました
+        media_url: /assets/images/webp
+        required: false
+      - name: categories
+        label: カテゴリ（カンマ区切り、または個別入力）
+        type: list
+        required: false
+      - name: tags
+        label: タグ
+        type: list
+        required: false
       - name: body
         label: 本文
         type: rich-text
