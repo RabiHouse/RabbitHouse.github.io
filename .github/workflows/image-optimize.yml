@@ -1,0 +1,25 @@
+name: Optimize Images
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'assets/images/**' # 画像を保存しているフォルダ名に合わせてください
+      
+jobs:
+  build:
+    name: calver-and-image-minimize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Compress Images & Convert to WebP
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          # 圧縮率の設定（80%くらいの画質を維持しつつ激変するほど軽くなります）
+          jpegQuality: '80'
+          pngQuality: '80'
+          webpQuality: '80'
