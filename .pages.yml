@@ -1,0 +1,24 @@
+collections:
+  - name: posts
+    label: 記事一覧
+    path: _posts
+    type: collection
+    layout: body
+    fields:
+      - name: title
+        label: タイトル
+        type: string
+        required: true
+      - name: date
+        label: 公開日時
+        type: date
+        required: true
+      - name: layout
+        label: レイアウト
+        type: string
+        default: post
+        required: true
+      - name: body
+        label: 本文
+        type: rich-text
+        required: true
