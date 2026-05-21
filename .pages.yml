@@ -25,8 +25,8 @@ content:
         required: true
       - name: image
         label: サムネイル画像URL
-        type: string # ← 文字列（URL）を入力できるように変更しました
-        default: assets/images/webp/didyouknow.svg # ← よく使う画像をデフォルトに設定！
+        type: string
+        default: assets/images/webp/didyouknow.svg
         required: false
       - name: categories
         label: カテゴリ
@@ -39,4 +39,5 @@ content:
       - name: body
         label: 本文
         type: rich-text
+        media_url: /assets/images # ← 本文にドロップした画像の保存先を追加しました！
         required: true
