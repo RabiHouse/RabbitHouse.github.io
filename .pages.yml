@@ -1,4 +1,4 @@
-collections:
+collections: 
   - name: posts
     label: 記事一覧
     path: _posts
