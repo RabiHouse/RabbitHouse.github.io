@@ -4,13 +4,13 @@ date: 2026-06-08
 layout: post
 author: Rabbitflower
 image: assets/images/webp/didyouknow.svg
-categories: ブログ, minne
-tags: ブログ, デジタルアイテム, ダウンロード商品, うさぎ,  Rabbit, ジャーナル, 日記
+categories: ブログ,minne
+tags: ブログ,デジタルアイテム,ダウンロード商品,うさぎ,Rabbit,ジャーナル,日記
 ---
 うさぎと暮らしていると、ふとした瞬間に「前回の体重はいつ測っただろう？」「この薬はいつから飲んでいたかな？」と思うことがあります。
 
 また、病院で診察を受ける際に、
- <!--more-->
+ 
 
 「最近の体重の変化はありますか？」  
 「食欲はどうですか？」  
