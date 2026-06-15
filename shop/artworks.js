@@ -1,5 +1,5 @@
 const artworks = [
-   {
+  {
     title: "Rabbitflower Doll#99 [water color]",
     image: "./images/099.jpg",
     link: "https://www.paypal.com/ncp/payment/G47WB7HNFAW2J",
