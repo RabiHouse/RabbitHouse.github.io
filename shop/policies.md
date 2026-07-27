@@ -5,7 +5,7 @@ permalink: /policies/
 ---
 
 
->  Rabbitflower Diary
+#  Rabbitflower Diary
 
 Original watercolor artwork and digital creations by Japanese artist Rabiko.
 
@@ -15,11 +15,11 @@ https://ko-fi.com/rabbitflower/shop
 
 ※下記に日本語版有り
 
-# >  Rabbitflower Diary – Shop Policies
+##  Rabbitflower Diary – Shop Policies
 
-Welcome to >  Rabbitflower Diary.
+Welcome to #  Rabbitflower Diary.
 
->  Rabbitflower Diary is an independent art shop operated by Rabbitflower, offering original watercolor artwork, handmade creations, and digital products.
+#  Rabbitflower Diary is an independent art shop operated by Rabbitflower, offering original watercolor artwork, handmade creations, and digital products.
 
 **Official Shop**
 
@@ -102,7 +102,7 @@ Approved refunds will be issued using the original payment method.
 
 # Privacy Policy
 
->  Rabbitflower Diary respects your privacy.
+#  Rabbitflower Diary respects your privacy.
 
 We collect only the personal information necessary to:
 
@@ -112,7 +112,7 @@ We collect only the personal information necessary to:
 
 We never sell customer information.
 
-Payment information is processed securely by third-party payment providers such as Ko-fi and is never stored by >  Rabbitflower Diary.
+Payment information is processed securely by third-party payment providers such as Ko-fi and is never stored by #  Rabbitflower Diary.
 
 Information may only be disclosed when legally required.
 
@@ -124,7 +124,7 @@ All artwork, illustrations, photographs, and digital products remain protected b
 
 Purchasing an artwork transfers ownership of the physical item only.
 
-Copyright remains with >  Rabbitflower Diary.
+Copyright remains with #  Rabbitflower Diary.
 
 The following are prohibited without written permission:
 
@@ -137,9 +137,9 @@ The following are prohibited without written permission:
 - NFT creation
 - Any unauthorized use
 
->  Rabbitflower Diary reserves the right to cancel an order in exceptional situations including payment problems, inventory errors, or suspected fraudulent activity.
+#  Rabbitflower Diary reserves the right to cancel an order in exceptional situations including payment problems, inventory errors, or suspected fraudulent activity.
 
-By purchasing from >  Rabbitflower Diary, you agree to these policies.
+By purchasing from #  Rabbitflower Diary, you agree to these policies.
 
 ---
 
@@ -155,9 +155,9 @@ We aim to respond within **3 business days**.
 
 ---
 
-# About >  Rabbitflower Diary
+# About #  Rabbitflower Diary
 
->  Rabbitflower Diary is an independent creative brand operated by Japanese artist **Rabiko**.
+#  Rabbitflower Diary is an independent creative brand operated by Japanese artist **Rabiko**.
 
 We create original watercolor paintings, handmade goods, illustrations, and digital creations inspired by rabbits, nature, and gentle everyday moments.
 
@@ -170,11 +170,11 @@ _Last Updated: July 2026_
   
   
 
-# >  Rabbitflower Diary ショップポリシー
+##  Rabbitflower Diary ショップポリシー
 
->  Rabbitflower Diaryをご利用いただき、ありがとうございます。
+#  Rabbitflower Diaryをご利用いただき、ありがとうございます。
 
->  Rabbitflower Diaryは、Rabbitflowerが運営するアートショップです。
+#  Rabbitflower Diaryは、Rabbitflowerが運営するアートショップです。
 オリジナル水彩画、ハンドメイド作品、デジタル作品などを制作・販売しています。
 
 **公式ショップ（Ko-fi）**
@@ -274,7 +274,7 @@ https://ko-fi.com/rabbitflower/shop
 
 # プライバシーポリシー
 
->  Rabbitflower Diaryでは、お客様の個人情報を適切に管理いたします。
+#  Rabbitflower Diaryでは、お客様の個人情報を適切に管理いたします。
 
 取得する情報は以下の目的のみに利用します。
 
@@ -284,7 +284,7 @@ https://ko-fi.com/rabbitflower/shop
 
 個人情報を第三者へ販売・提供することはありません。
 
-決済情報はKo-fiなどの決済サービスにより安全に処理され、>  Rabbitflower Diaryがカード情報等を保持することはありません。
+決済情報はKo-fiなどの決済サービスにより安全に処理され、#  Rabbitflower Diaryがカード情報等を保持することはありません。
 
 法令に基づく場合を除き、お客様の情報を第三者へ開示することはありません。
 
@@ -292,7 +292,7 @@ https://ko-fi.com/rabbitflower/shop
 
 # 利用規約
 
-当ショップで販売している作品・イラスト・写真・デジタルデータなどの著作権は、すべて>  Rabbitflower Diaryに帰属します。
+当ショップで販売している作品・イラスト・写真・デジタルデータなどの著作権は、すべて#  Rabbitflower Diaryに帰属します。
 
 作品をご購入いただいた場合でも、著作権は譲渡されません。
 
@@ -325,9 +325,9 @@ https://ko-fi.com/rabbitflower/shop
 
 ---
 
-# >  Rabbitflower Diaryについて
+# #  Rabbitflower Diaryについて
 
->  Rabbitflower Diaryは、日本人アーティスト「Rabbitflower」が運営する個人ブランドです。
+#  Rabbitflower Diaryは、日本人アーティスト「Rabbitflower」が運営する個人ブランドです。
 
 うさぎや自然をテーマにしたオリジナル水彩画、イラスト、ハンドメイド作品、デジタル作品などを制作しています。
 
