@@ -1,19 +1,19 @@
 const artworks = [
   {
     title: "Rabbitflower Doll#99 [water color]",
-    image: "./images/099.jpg",
+    image: "https://res.cloudinary.com/dzgxt2s8f/image/upload/c_fill,h_1080/l_watermark_b,fl_relative,w_1.0,o_70/385264884025-4fb8-8b4f-6210c3a386bd949b8d158d76-48d1-8baa-8e3ecccd1871c5be35c6160a-4edb-846e-f09711906988_t9n2io.webp",
     link: "https://www.paypal.com/ncp/payment/G47WB7HNFAW2J",
     soldout: false
   },
   {
     title: "Rabbitflower Doll#95 [water color]",
-    image: "./images/095.jpg",
+    image: "https://res.cloudinary.com/dzgxt2s8f/image/upload/c_fill,h_1080/l_watermark_b,fl_relative,w_1.0,o_70/b9e73da2db58-4f9d-b2d3-0f957faf8510f982cfbfe3de-4b20-87f7-410eec745d02c2c958b28b82-40e9-9ef8-38974be1b33a_nptqo2.webp",
     link: "https://www.paypal.com/ncp/payment/7RBVGGHN4SCJQ",
     soldout: false
   },
   {
     title: "Rabbitflower Doll#94 [water color]",
-    image: "./images/094.jpg",
+    image: "https://res.cloudinary.com/dzgxt2s8f/image/upload/c_fill,h_1080/l_watermark_b,fl_relative,w_1.0,o_70/3f7d2fde4847-4acf-8f18-ec1f2e925b1c80002b674768-4419-8354-ada64e5f88d93b6f3e4648ca-4a30-b0e6-fbd9ec5ee97b_mr8xy7.webp",
     link: "https://www.paypal.com/ncp/payment/ELVHS843KVW7L",
     soldout: false
   },
