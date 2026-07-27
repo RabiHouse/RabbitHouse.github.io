@@ -1,10 +1,3 @@
----
-layout: default
-title: Shop Policies
-permalink: /policies/
----
-
-
 #  Rabbitflower Diary
 
 Original watercolor artwork and digital creations by Japanese artist Rabiko.
