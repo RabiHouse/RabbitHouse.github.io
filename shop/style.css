@@ -208,4 +208,11 @@ footer {
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   color: #95859c;         /* 少し控えめなグレー */
+
+}
+
+.padded-box {
+  padding-left: 15%;  /* 左側の空白 */
+  padding-right: 15%; /* 右側の空白 */
+  text-align: center; /* 必要に応じてテキスト自体も中央揃えに */
 }
