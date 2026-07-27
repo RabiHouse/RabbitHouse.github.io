@@ -212,7 +212,7 @@ footer {
 }
 
 .padded-box {
-  padding-left: 15%;  /* 左側の空白 */
-  padding-right: 15%; /* 右側の空白 */
+  padding-left: 20%;  /* 左側の空白 */
+  padding-right: 20%; /* 右側の空白 */
   text-align: center; /* 必要に応じてテキスト自体も中央揃えに */
 }
