@@ -13,12 +13,6 @@ Ko-fi Shop
 https://ko-fi.com/rabbitflower/shop
 
 
----
-layout: default
-title: Shop Policies
-permalink: /policies/
----
-
 ※下記に日本語版有り
 
 # Rabbit Flower – Shop Policies
