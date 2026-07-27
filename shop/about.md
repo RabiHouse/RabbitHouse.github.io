@@ -16,5 +16,3 @@ Thank you for supporting independent artists.
 
 Shop  
 <a href="https://ko-fi.com/rabbitflower/shop" target="_blank" rel="noopener noreferrer">https://ko-fi.com/rabbitflower/shop
-
-</a>
