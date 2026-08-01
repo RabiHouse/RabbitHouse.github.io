@@ -64,4 +64,5 @@ exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
 
 excerpt_separator: <!--more-->
 
-
+future: true
+timezone: Asia/Tokyo
