@@ -1,7 +1,8 @@
 ---
 title: "ダリ展"
 date: 2016-11-11
-autimage: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
+author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 hor: Rabbitflower
 categories: [Museum]
 tags: 
