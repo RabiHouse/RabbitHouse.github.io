@@ -3,6 +3,7 @@ title: "ミケランジェロ展天才の奇跡"
 date: 2013-09-06
 
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: [ミケランジェロ, michelangelo, 上野, 国立西洋美術館]
 ---

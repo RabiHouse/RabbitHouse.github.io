@@ -3,6 +3,7 @@ title: "藤子・Ｆ・不二雄ミュージアム"
 date: 2014-08-11
 author: Rabbitflower
 categories: [Museum]
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 
 tags: 
   - "川崎"

@@ -2,6 +2,7 @@
 title: "ブリューゲル展"
 date: 2018-03-22
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: 
   - "ブリューゲル"

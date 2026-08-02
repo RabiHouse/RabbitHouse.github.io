@@ -2,6 +2,7 @@
 title: "星の王子さまミュージアム"
 date: 2014-10-01
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: 
   - "星の王子さま"

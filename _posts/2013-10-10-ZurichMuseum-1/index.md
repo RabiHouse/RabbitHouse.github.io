@@ -2,6 +2,7 @@
 title: "チューリヒ博物館"
 date: 2013-10-10
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: [スイス, チューリッヒ, チューリッヒ美術館, swiss, zurich]
 ---

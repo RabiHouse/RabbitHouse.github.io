@@ -2,6 +2,7 @@
 title: "レオナルド・ダ・ヴィンチ展天才の肖像"
 date: 2013-04-23
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: [ダヴィンチ, DaVinci, 上野, 東京都美術館]
 ---

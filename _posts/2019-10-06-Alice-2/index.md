@@ -2,6 +2,7 @@
 title: "不思議の国のアリス展"
 date: 2019-10-06
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: 
   - "そごう"

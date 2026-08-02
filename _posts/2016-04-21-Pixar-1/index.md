@@ -2,6 +2,7 @@
 title: "ピクサー３０周年記念展ピクサー展"
 date: 2016-04-21
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: 
   - "ディズニー"

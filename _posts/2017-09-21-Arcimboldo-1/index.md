@@ -2,6 +2,7 @@
 title: "アルチンボルド展"
 date: 2017-09-21
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: 
   - "アルチンボルド"

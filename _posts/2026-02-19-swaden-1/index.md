@@ -2,6 +2,7 @@
 title: "スウェーデン絵画　北欧の光、日常のかがやき"
 date: 2026-02-19
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: [スェーデン, スウェーデン美術館, 北欧, 世界, リサ・ラーソン, ムーミン, 絵画, 上野, 東京都美術館, 世界観]
 ---

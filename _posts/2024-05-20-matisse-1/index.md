@@ -2,6 +2,7 @@
 title: "マティス　自由なフォルム"
 date: 2024-05-20
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: [matisse, マティス, フォルム, 世界, デザイン, 絵画, 六本木, 国立新美術館, 世界観]
 ---

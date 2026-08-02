@@ -2,6 +2,7 @@
 title: "ミュシャ展 パリの夢 モラヴィアの祈り"
 date: 2013-05-13
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: 
   - "ミュシャ"

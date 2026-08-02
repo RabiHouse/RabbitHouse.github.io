@@ -2,6 +2,7 @@
 title: "ウェス・アンダーソンすぎる風景展"
 date: 2023-11-30
 author: Rabbitflower
+image: https://res.cloudinary.com/dzgxt2s8f/image/upload/w_800/artmuseum_ibs0cl.png 
 categories: [Museum]
 tags: 
   - "bunkamura"
