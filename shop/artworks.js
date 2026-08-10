@@ -1,4 +1,11 @@
 const artworks = [
+{
+    title: "Rabbitflower Doll#104 [water color]",
+    image: "https://res.cloudinary.com/dzgxt2s8f/image/upload/f_webp,c_fill,h_1080/l_watermark_b,fl_relative,w_1.0,o_50/PXL_20260809_150327855.MP_axyexq.jpg",
+    link: "https://ko-fi.com/s/6581f10836",
+    soldout: false
+  },
+
   {
     title: "Rabbitflower Doll#100 [water color]",
     image: "https://res.cloudinary.com/dzgxt2s8f/image/upload/c_fill,h_540/l_watermark_b,fl_relative,w_1.0,h_1.0,c_fill,o_70/ii_wol2qp.png",
