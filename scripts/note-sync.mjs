@@ -49,6 +49,39 @@ function nextNoteNumber() {
   return max + 1;
 }
 
+function stripForCount(text) {
+  return text
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+    .replace(/[#*_`>\-]/g, '')
+    .trim();
+}
+
+function insertMoreTag(markdown, minChars = 100) {
+  const paragraphs = markdown.split(/\n\n+/).filter((p) => p.trim().length > 0);
+  if (paragraphs.length === 0) return markdown;
+
+  let acc = '';
+  let cutIndex = -1;
+
+  for (let i = 0; i < paragraphs.length; i++) {
+    acc += (acc ? '\n\n' : '') + paragraphs[i];
+    if (stripForCount(acc).length >= minChars) {
+      cutIndex = i;
+      break;
+    }
+  }
+
+  // 全体が短くて100文字に届かない場合は、末尾に入れる
+  if (cutIndex === -1) {
+    return `${paragraphs.join('\n\n')}\n\n<!--more-->`;
+  }
+
+  const before = paragraphs.slice(0, cutIndex + 1).join('\n\n');
+  const after = paragraphs.slice(cutIndex + 1).join('\n\n');
+  return after ? `${before}\n\n<!--more-->\n\n${after}` : `${before}\n\n<!--more-->`;
+}
+
 function escapeYamlString(str) {
   return String(str).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
@@ -126,6 +159,7 @@ async function main() {
     }
 
     const markdown = turndown.turndown(bodyHtml).trim();
+    const markdownWithMore = insertMoreTag(markdown, 100);
 
     const pubDate = new Date(item.pubDate || item.isoDate || Date.now());
     const isoDate = pubDate.toISOString();
@@ -149,7 +183,7 @@ async function main() {
       '',
     ].join('\n');
 
-    const body = `${markdown}\n\n[元記事はこちら](${item.link})\n`;
+    const body = `${markdownWithMore}\n\n[元記事はこちら](${item.link})\n`;
 
     fs.writeFileSync(path.join(POSTS_DIR, filename), frontMatter + body, 'utf8');
     console.log(`[created] ${filename}`);
