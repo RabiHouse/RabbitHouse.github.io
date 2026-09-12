@@ -23,6 +23,15 @@ function extractThumbnail($) {
   );
 }
 
+function extractNoteTags($) {
+  const tags = new Set();
+  $('a[href*="/hashtag/"]').each((_, el) => {
+    const text = $(el).text().trim().replace(/^#/, '');
+    if (text) tags.add(text);
+  });
+  return [...tags];
+}
+
 function extractBodyHtml($) {
   for (const selector of BODY_SELECTORS) {
     const el = $(selector).first();
@@ -111,6 +120,7 @@ async function main() {
 
     const $ = cheerio.load(html);
     const image = extractThumbnail($);
+    const noteTags = extractNoteTags($);
     const bodyHtml = extractBodyHtml($);
 
     if (!bodyHtml) {
@@ -128,6 +138,18 @@ async function main() {
       newFm = newFm.replace(/^image:.*$/m, `image: ${image}`);
     } else {
       newFm += `\nimage: ${image}`;
+    }
+
+    // tags: 行に、noteのハッシュタグを合流させる（既存タグは残す）
+    const existingTagsMatch = newFm.match(/^tags:\s*(.*)$/m);
+    const existingTags = existingTagsMatch
+      ? existingTagsMatch[1].split(',').map((t) => t.trim()).filter(Boolean)
+      : ['note', 'blog'];
+    const mergedTags = Array.from(new Set([...existingTags, ...noteTags])).join(',');
+    if (existingTagsMatch) {
+      newFm = newFm.replace(/^tags:.*$/m, `tags: ${mergedTags}`);
+    } else {
+      newFm += `\ntags: ${mergedTags}`;
     }
 
     const newBody = `${markdownWithMore}\n\n[元記事はこちら](${noteUrl})\n`;

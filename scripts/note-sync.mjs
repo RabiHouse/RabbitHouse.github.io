@@ -103,6 +103,15 @@ function extractThumbnail($) {
   );
 }
 
+function extractNoteTags($) {
+  const tags = new Set();
+  $('a[href*="/hashtag/"]').each((_, el) => {
+    const text = $(el).text().trim().replace(/^#/, '');
+    if (text) tags.add(text);
+  });
+  return [...tags];
+}
+
 function extractBodyHtml($) {
   for (const selector of BODY_SELECTORS) {
     const el = $(selector).first();
@@ -148,6 +157,8 @@ async function main() {
     const $ = cheerio.load(html);
     const image = extractThumbnail($);
     const bodyHtml = extractBodyHtml($);
+    const noteTags = extractNoteTags($);
+    const tagsStr = Array.from(new Set([...TAGS.split(','), ...noteTags])).join(',');
 
     if (!bodyHtml) {
       // 本文を取得できない場合は、壊れた記事を作らず処理をスキップする
@@ -176,7 +187,7 @@ async function main() {
       `author: ${AUTHOR}`,
       `image: ${image}`,
       'categories: ',
-      `tags: ${TAGS}`,
+      `tags: ${tagsStr}`,
       `note_id: ${noteId}`,
       `note_url: ${item.link}`,
       '---',
