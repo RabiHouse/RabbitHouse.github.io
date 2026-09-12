@@ -1,33 +1,150 @@
-name: Repair note articles (one-time)
+import TurndownService from 'turndown';
+import * as cheerio from 'cheerio';
+import fs from 'fs';
+import path from 'path';
 
-on:
-  workflow_dispatch: {}
+// ==== 設定 ====
+const POSTS_DIR = path.join(process.cwd(), '_posts');
+const UA = 'Mozilla/5.0 (compatible; note-sync-bot/1.0)';
 
-permissions:
-  contents: write
+const BODY_SELECTORS = [
+  '.note-common-styles__textnote-body',
+  'div[class*="note-common-styles__textnote-body"]',
+];
 
-jobs:
-  repair:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+const turndown = new TurndownService({ headingStyle: 'atx', bulletListMarker: '-' });
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+function extractThumbnail($) {
+  return (
+    $('meta[property="og:image"]').attr('content') ||
+    $('meta[name="twitter:image"]').attr('content') ||
+    $('meta[name="thumbnail"]').attr('content') ||
+    ''
+  );
+}
 
-      - name: Install dependencies
-        run: npm install cheerio turndown
+function extractBodyHtml($) {
+  for (const selector of BODY_SELECTORS) {
+    const el = $(selector).first();
+    if (el && el.length && el.html() && el.html().trim().length > 0) {
+      return el.html();
+    }
+  }
+  return null;
+}
 
-      - name: Run repair script
-        run: node scripts/note-repair.mjs
+function stripForCount(text) {
+  return text
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+    .replace(/[#*_`>\-]/g, '')
+    .trim();
+}
 
-      - name: Commit and push if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add _posts
-          git diff --cached --quiet || git commit -m "note記事の本文・サムネイルを修復"
-          git push
+function insertMoreTag(markdown, minChars = 100) {
+  const paragraphs = markdown.split(/\n\n+/).filter((p) => p.trim().length > 0);
+  if (paragraphs.length === 0) return markdown;
+
+  let acc = '';
+  let cutIndex = -1;
+
+  for (let i = 0; i < paragraphs.length; i++) {
+    acc += (acc ? '\n\n' : '') + paragraphs[i];
+    if (stripForCount(acc).length >= minChars) {
+      cutIndex = i;
+      break;
+    }
+  }
+
+  if (cutIndex === -1) {
+    return `${paragraphs.join('\n\n')}\n\n<!--more-->`;
+  }
+
+  const before = paragraphs.slice(0, cutIndex + 1).join('\n\n');
+  const after = paragraphs.slice(cutIndex + 1).join('\n\n');
+  return after ? `${before}\n\n<!--more-->\n\n${after}` : `${before}\n\n<!--more-->`;
+}
+
+function parseFrontMatter(content) {
+  const m = content.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!m) return null;
+  return { fm: m[1], body: m[2] };
+}
+
+async function main() {
+  const files = fs
+    .readdirSync(POSTS_DIR)
+    .filter((f) => f.endsWith('.md'))
+    .sort();
+
+  let fixed = 0;
+  let failed = 0;
+  let skipped = 0;
+
+  for (const file of files) {
+    const filePath = path.join(POSTS_DIR, file);
+    const content = fs.readFileSync(filePath, 'utf8');
+    const parsed = parseFrontMatter(content);
+    if (!parsed) {
+      skipped += 1;
+      continue;
+    }
+
+    const urlMatch = parsed.fm.match(/^note_url:\s*(\S+)/m);
+    if (!urlMatch) {
+      skipped += 1; // note記事以外のファイルはスキップ
+      continue;
+    }
+    const noteUrl = urlMatch[1];
+
+    console.log(`[fetch] ${file} -> ${noteUrl}`);
+    let html;
+    try {
+      const res = await fetch(noteUrl, { headers: { 'User-Agent': UA } });
+      if (!res.ok) throw new Error(`status ${res.status}`);
+      html = await res.text();
+    } catch (err) {
+      console.error(`[error] ${file}: ${err.message}`);
+      failed += 1;
+      continue;
+    }
+
+    const $ = cheerio.load(html);
+    const image = extractThumbnail($);
+    const bodyHtml = extractBodyHtml($);
+
+    if (!bodyHtml) {
+      console.warn(`[warn] 本文を取得できませんでした（スキップ）: ${file}`);
+      failed += 1;
+      continue;
+    }
+
+    const markdown = turndown.turndown(bodyHtml).trim();
+    const markdownWithMore = insertMoreTag(markdown, 100);
+
+    // image: 行を更新（無ければ追加）
+    let newFm = parsed.fm;
+    if (/^image:.*$/m.test(newFm)) {
+      newFm = newFm.replace(/^image:.*$/m, `image: ${image}`);
+    } else {
+      newFm += `\nimage: ${image}`;
+    }
+
+    const newBody = `${markdownWithMore}\n\n[元記事はこちら](${noteUrl})\n`;
+    const newContent = `---\n${newFm}\n---\n${newBody}`;
+
+    fs.writeFileSync(filePath, newContent, 'utf8');
+    console.log(`[fixed] ${file}`);
+    fixed += 1;
+
+    // note側への配慮として少し間隔をあける
+    await new Promise((r) => setTimeout(r, 1500));
+  }
+
+  console.log(`修復: ${fixed}件 / 失敗: ${failed}件 / スキップ: ${skipped}件`);
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
