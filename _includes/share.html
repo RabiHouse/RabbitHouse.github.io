@@ -3,29 +3,53 @@
         Share
     </p>
     <ul>
+        <!-- X (旧Twitter) -->
         <li class="ml-1 mr-1">
-            <a target="_blank" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ page.url | absolute_url }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                <i class="fab fa-twitter"></i>
+            <a target="_blank" href="https://x.com/intent/post?text={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}" onclick="window.open(this.href, 'x-share', 'width=550,height=435');return false;" title="Xでシェア">
+                <i class="fa-brands fa-x-twitter"></i>
             </a>
         </li>
 
+        <!-- Bluesky -->
         <li class="ml-1 mr-1">
-            <a target="_blank" href="https://facebook.com/sharer.php?u={{ page.url | absolute_url }}" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
-                <i class="fab fa-facebook-f"></i>
+            <a target="_blank" href="https://bsky.app/intent/compose?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" onclick="window.open(this.href, 'bluesky-share', 'width=550,height=435');return false;" title="Blueskyでシェア">
+                <i class="fa-brands fa-bluesky"></i>
             </a>
         </li>
 
+        <!-- LINE -->
         <li class="ml-1 mr-1">
-            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url }}" onclick="window.open(this.href, 'width=550,height=435');return false;">
-                <i class="fab fa-linkedin-in"></i>
+            <a target="_blank" href="https://social-plugins.line.me/lineit/share?url={{ page.url | absolute_url | url_encode }}" onclick="window.open(this.href, 'line-share', 'width=550,height=500');return false;" title="LINEで送る">
+                <i class="fa-brands fa-line"></i>
             </a>
         </li>
 
+        <!-- Facebook -->
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u={{ page.url | absolute_url | url_encode }}" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;" title="Facebookでシェア">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <!-- Pinterest -->
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://pinterest.com/pin/create/button/?url={{ page.url | absolute_url | url_encode }}&description={{ page.title | url_encode }}" onclick="window.open(this.href, 'pinterest-share', 'width=750,height=550');return false;" title="Pinterestでピン">
+                <i class="fa-brands fa-pinterest-p"></i>
+            </a>
+        </li>
+
+        <!-- LinkedIn -->
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=435');return false;" title="LinkedInでシェア">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+        </li>
     </ul>
+
     {% if page.comments != false %}
     <div class="sep">
     </div>
     <ul>
-      </ul>
+    </ul>
     {% endif %}
 </div>
