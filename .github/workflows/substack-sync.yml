@@ -1,0 +1,28 @@
+name: Sync Substack
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 毎日 06:00 JST
+  workflow_dispatch:        # 手動実行も可
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install feedparser html2text beautifulsoup4
+      - run: python scripts/sync_substack.py
+        env:
+          SUBSTACK_FEED: ${{ vars.SUBSTACK_FEED }}
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _posts
+          git diff --cached --quiet || (git commit -m "Sync from Substack" && git push)
