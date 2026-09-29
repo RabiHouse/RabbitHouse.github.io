@@ -63,9 +63,15 @@ def restore_youtube(md):
         )
     return re.sub(r"@@YT:([\w\\-]+)@@", repl, md)
 
+print("FEED =", repr(FEED))
+if not FEED:
+    raise SystemExit("SUBSTACK_FEED is empty: Repository variables に登録されているか確認してください")
+
 feed = feedparser.parse(FEED, agent="Mozilla/5.0 (compatible; blog-sync)")
+print("status:", feed.get("status"), "| entries:", len(feed.entries),
+      "| bozo:", feed.get("bozo"), feed.get("bozo_exception"))
 if not feed.entries:
-    raise SystemExit(f"No entries fetched (status={feed.get('status')})")
+    raise SystemExit("No entries fetched")
 
 for e in feed.entries:
     d = datetime(*e.published_parsed[:6])
