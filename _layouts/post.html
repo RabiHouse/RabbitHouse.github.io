@@ -10,8 +10,8 @@ post_class: post-template
 <div class="container">
     <div class="row">
 
-<!-- 左側のシェア・Blueskyエリア -->
-        <div class="col-md-2 pl-0">
+<!-- 左側のシェア・Blueskyエリア (右側に余白 mr-4 を追加) -->
+        <div class="col-md-2 pl-0 mr-4">
             <!-- Share -->
             <div class="mb-3">
                 {% include share.html %}
@@ -21,7 +21,6 @@ post_class: post-template
                 {% include bluesky.html %}
             </div>
         </div>
-
 
         <!-- Post -->
         {% assign author = site.authors[page.author] %}
